@@ -4,44 +4,143 @@ import { ArrowLeftRight, RefreshCw, Copy } from 'lucide-react';
 const Traductor = () => {
   const [text, setText] = useState('');
 
+  const styles = {
+    container: {
+      flex: 1,
+      backgroundColor: '#f4ece1',
+      padding: '40px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    },
+    header: {
+      textAlign: 'center',
+      marginBottom: '40px'
+    },
+    headerTitle: {
+      fontSize: '2.5rem',
+      color: '#3e2723',
+      fontWeight: '800',
+      marginBottom: '10px'
+    },
+    card: {
+      background: 'white',
+      width: '100%',
+      maxWidth: '800px',
+      borderRadius: '30px',
+      padding: '30px',
+      boxShadow: '0 10px 25px rgba(0,0,0,0.05)'
+    },
+    langSelectors: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      marginBottom: '30px'
+    },
+    langBtn: {
+      backgroundColor: '#bf360c',
+      color: 'white',
+      border: 'none',
+      padding: '12px 35px',
+      borderRadius: '12px',
+      fontWeight: 'bold',
+      fontSize: '1.1rem',
+      cursor: 'pointer'
+    },
+    swapIcon: {
+      color: '#888'
+    },
+    textAreas: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: '20px',
+      marginBottom: '20px'
+    },
+    inputGroup: {
+      position: 'relative'
+    },
+    textarea: {
+      width: '100%',
+      height: '200px',
+      border: '1px solid #ddd',
+      borderRadius: '15px',
+      padding: '15px',
+      resize: 'none',
+      fontFamily: 'inherit',
+      fontSize: '1rem',
+      outline: 'none',
+      boxSizing: 'border-box'
+    },
+    charCount: {
+      fontSize: '0.8rem',
+      color: '#888',
+      marginTop: '5px',
+      display: 'block'
+    },
+    actionContainer: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    btnTranslate: {
+      backgroundColor: '#388e3c',
+      color: 'white',
+      border: 'none',
+      padding: '12px 30px',
+      borderRadius: '12px',
+      fontSize: '1.2rem',
+      fontWeight: 'bold',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      cursor: 'pointer'
+    },
+    copyIcon: {
+      position: 'absolute',
+      top: '10px',
+      right: '10px',
+      color: '#888',
+      cursor: 'pointer'
+    }
+  };
+
   return (
-    <div className="flex-1 bg-content p-10 flex flex-col items-center">
-      <header className="text-center mb-10">
-        <h1 className="text-5xl font-extrabold text-stone-800 mb-2-5">Traductor De Runa Shimi 🌿</h1>
+    <div style={styles.container}>
+      <header style={styles.header}>
+        <h1 style={styles.headerTitle}>Traductor De Runa Shimi 🌿</h1>
         <p>Conecta con las raíces ancestrales a través de la lengua Runa Shimi.</p>
       </header>
 
-      <div className="bg-white w-full max-w-[800px] rounded-[30px] p-8 shadow-lg">
-        <div className="flex justify-around items-center mb-8">
-          <button className="bg-orange-900 text-white border-none py-3 px-9 rounded-xl font-bold text-lg">ESPAÑOL</button>
-          <ArrowLeftRight className="text-stone-600" />
-          <button className="bg-orange-900 text-white border-none py-3 px-9 rounded-xl font-bold text-lg">RUNA SHIMI</button>
+      <div style={styles.card}>
+        <div style={styles.langSelectors}>
+          <button style={styles.langBtn}>ESPAÑOL</button>
+          <ArrowLeftRight style={styles.swapIcon} />
+          <button style={styles.langBtn}>RUNA SHIMI</button>
         </div>
 
-        <div className="grid grid-cols-2 gap-5 mb-5">
-          <div className="relative">
+        <div style={styles.textAreas}>
+          <div style={styles.inputGroup}>
             <textarea 
-              className="w-full h-[200px] border border-gray-300 rounded-xl p-4 resize-none font-inherit text-base focus:outline-none focus:ring-2 focus:ring-orange-900/20"
+              style={styles.textarea}
               placeholder="Escribe aquí en español..."
               maxLength={300}
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <span className="text-xs text-gray-500 mt-1 block">{text.length}/300</span>
+            <span style={styles.charCount}>{text.length}/300</span>
           </div>
 
-          <div className="relative">
+          <div style={styles.inputGroup}>
             <textarea 
-              className="w-full h-[200px] border border-gray-300 rounded-xl p-4 resize-none font-inherit text-base focus:outline-none focus:ring-2 focus:ring-orange-900/20"
+              style={styles.textarea}
               readOnly 
               placeholder="La traducción aparecerá aquí..."
             />
-            <Copy className="absolute top-2-5 right-2-5 text-gray-500 cursor-pointer hover:text-gray-700" size={18} />
+            <Copy style={styles.copyIcon} size={18} />
           </div>
         </div>
 
-        <div className="flex justify-center">
-          <button className="bg-green-700 text-white border-none py-3 px-8 rounded-xl text-xl font-bold flex items-center gap-2-5 cursor-pointer hover:bg-green-800 transition-colors">
+        <div style={styles.actionContainer}>
+          <button style={styles.btnTranslate}>
             Traducir <RefreshCw size={20} />
           </button>
         </div>

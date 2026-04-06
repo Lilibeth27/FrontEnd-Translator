@@ -4,7 +4,7 @@ import Traductor from '../components/translator/Traductor';
 
 const TranslatorPage = ({ isSidebarOpen, onToggleSidebar }) => {
   return (
-    <div className="flex h-screen w-screen bg-content">
+    <div style={{ display: 'flex', height: '100vh', width: '100vw', backgroundColor: '#f4ece1' }}>
       <Sidebar isOpen={isSidebarOpen} onToggle={onToggleSidebar} />
       <Traductor />
     </div>

@@ -11,39 +11,152 @@ const Sidebar = ({ isOpen, onToggle }) => {
     { icon: <Info size={20} />, text: 'Acerca de Runa Shimi' },
   ];
 
+  const styles = {
+    sidebar: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      backgroundColor: '#F4E6D4',
+      position: 'fixed',
+      left: 0,
+      top: 0,
+      boxSizing: 'border-box',
+      overflow: 'hidden',
+      transition: 'width 0.3s ease'
+    },
+    sidebarOpen: {
+      width: '250px',
+      padding: '20px'
+    },
+    sidebarClosed: {
+      width: '60px',
+      padding: '15px 10px',
+      alignItems: 'center'
+    },
+    header: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      marginBottom: '20px'
+    },
+    hamburger: {
+      cursor: 'pointer',
+      color: '#5d4037',
+      minWidth: '24px'
+    },
+    logoContainer: {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    mainLogo: {
+      width: '50px',
+      height: 'auto'
+    },
+    brandName: {
+      fontWeight: 'bold',
+      color: '#5d4037',
+      marginLeft: '8px'
+    },
+    profileSection: {
+      display: 'flex',
+      justifyContent: 'center',
+      margin: '20px 0'
+    },
+    avatarRing: {
+      width: '100px',
+      height: '100px',
+      borderRadius: '50%',
+      border: '3px solid #4a3728',
+      overflow: 'hidden'
+    },
+    avatar: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover'
+    },
+    navMenu: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '5px'
+    },
+    menuTitle: {
+      fontSize: '12px',
+      fontWeight: '800',
+      marginBottom: '15px',
+      color: '#2e1f1a'
+    },
+    navItem: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '15px',
+      padding: '10px',
+      cursor: 'pointer',
+      fontWeight: '600',
+      color: '#5d4037',
+      textDecoration: 'none'
+    },
+    navItemHover: {
+      backgroundColor: 'rgba(0,0,0,0.05)',
+      borderRadius: '8px'
+    },
+    navItemIcon: {
+      color: '#bf360c'
+    },
+    logoutSection: {
+      marginTop: 'auto'
+    },
+    mobileHeader: {
+      display: 'none',
+      padding: '10px',
+      backgroundColor: '#C4451C',
+      color: 'white'
+    }
+  };
+
+  const sidebarStyle = {
+    ...styles.sidebar,
+    ...(isOpen ? styles.sidebarOpen : styles.sidebarClosed)
+  };
+
   return (
-    <div className={`flex flex-col h-screen bg-canvas fixed left-0 top-0 box-border overflow-hidden transition-all duration-300 ${isOpen ? 'w-[250px] p-5' : 'w-[60px] p-3.75 items-center'}`}>
-      <div className="flex items-center gap-2-5 mb-5">
-        <Menu className="cursor-pointer text-secondary min-w-6 hover:text-orange-900" onClick={onToggle} />
+    <div style={sidebarStyle}>
+      <div style={styles.header}>
+        <Menu style={styles.hamburger} onClick={onToggle} />
         {isOpen && (
-          <div className="flex items-center">
-            <img src={logo} alt="Runa Logo" className="w-[50px] h-auto" />
-            <span className="font-bold text-secondary ml-2">RUNA SHIMI</span>
+          <div style={styles.logoContainer}>
+            <img src={logo} alt="Runa Logo" style={styles.mainLogo} />
+            <span style={styles.brandName}>RUNA SHIMI</span>
           </div>
         )}
       </div>
 
       {isOpen && (
         <>
-          <div className="flex justify-center my-5">
-            <div className="w-[100px] h-[100px] rounded-full border-3 border-stone-700 overflow-hidden">
-              <img src="https://via.placeholder.com/80" alt="Avatar" className="w-full h-full object-cover" />
+          <div style={styles.profileSection}>
+            <div style={styles.avatarRing}>
+              <img src="https://via.placeholder.com/80" alt="Avatar" style={styles.avatar} />
             </div>
           </div>
 
-          <nav className="flex flex-col gap-1">
-            <p className="text-[12px] font-extrabold mb-3 text-stone-900">MENU DE NAVEGACION</p>
+          <nav style={styles.navMenu}>
+            <p style={styles.menuTitle}>MENU DE NAVEGACION</p>
             {menuItems.map((item, index) => (
-              <div key={index} className={`flex items-center gap-3-75 p-2-5 cursor-pointer font-semibold text-secondary ${item.active ? 'bg-stone-800/5 rounded-lg' : ''}`}>
-                <span className="text-orange-900">{item.icon}</span>
+              <div 
+                key={index} 
+                style={{
+                  ...styles.navItem,
+                  ...(item.active ? { backgroundColor: 'rgba(0,0,0,0.05)', borderRadius: '8px' } : {})
+                }}
+              >
+                <span style={styles.navItemIcon}>{item.icon}</span>
                 <span>{item.text}</span>
               </div>
             ))}
           </nav>
 
-          <div className="mt-auto">
-            <div className="flex items-center gap-3-75 p-2-5 cursor-pointer font-semibold text-secondary">
-              <LogOut size={20} className="text-orange-900" />
+          <div style={styles.logoutSection}>
+            <div style={styles.navItem}>
+              <LogOut size={20} style={styles.navItemIcon} />
               <span>Cerrar Sesión</span>
             </div>
           </div>

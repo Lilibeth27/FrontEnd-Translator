@@ -2,7 +2,7 @@ import React from 'react';
 import { Languages, History, Search, BookOpen, Info, LogOut, Menu } from 'lucide-react';
 import logo from '../../assets/logo.png';
 
-const Sidebar = ({ isOpen, onToggle }) => {
+const Sidebar = ({ isOpen, onToggle,onGoToLogin }) => {
   const menuItems = [
     { icon: <Languages size={20} />, text: 'Traductor', active: true },
     { icon: <History size={20} />, text: 'Historial' },
@@ -10,6 +10,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
     { icon: <BookOpen size={20} />, text: 'Diccionario' },
     { icon: <Info size={20} />, text: 'Acerca de Runa Shimi' },
   ];
+  
 
   const styles = {
     sidebar: {
@@ -156,6 +157,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
 
           <div style={styles.logoutSection}>
             <div style={styles.navItem}>
+              <div style={styles.navItem} onClick={onGoToLogin}></div>
               <LogOut size={20} style={styles.navItemIcon} />
               <span>Cerrar Sesión</span>
             </div>

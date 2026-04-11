@@ -11,13 +11,21 @@ const Traductor = ({ onGoToLogin }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   
-
+const frases = [
+  { esp: "Buenos Días", runa: "Alli puncha", icon: "🌞" },
+  { esp: "Gracias", runa: "Yupaychani", icon: "🙏" },
+  { esp: "Hola", runa: "Imanalla", icon: "👋" },
+  { esp: "Te quiero", runa: "Kanta kuyani", icon: "❤️" },
+  { esp: "Bienvenido", runa: "Alli shamushka", icon: "🏠" },
+  { esp: "Adiós", runa: "Kaykama", icon: "👋" },
+];
   const styles = {
     // --- CONTENEDOR PRINCIPAL BLINDADO ---
     container: {
       flex: 1,
       width: '100%',
-
+      height: '100vh',
+      overflowY: 'auto',
       paddingTop: isMobile ? '40px' : '40px',
       paddingRight: isMobile ? '15px' : '20px',
       paddingBottom: '20px',
@@ -46,13 +54,11 @@ const Traductor = ({ onGoToLogin }) => {
       borderRadius: '30px',
       padding: isMobile ? '20px' : '35px',
       boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
-      border: '1px solid #e0e0e0',
+      border: '1px solid #f4e6d4',
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column'
     },
-
-    // --- ESTILOS COMPARTIDOS ---
     langLabel: {
       backgroundColor: '#c64c24', 
       color: 'white',
@@ -94,7 +100,7 @@ const Traductor = ({ onGoToLogin }) => {
     },
     swapCircle: {
       backgroundColor: 'white',
-      border: '1px solid #ddd',
+      border: '1px solid #f4e6d4',
       borderRadius: '50%',
       width: '45px',
       height: '45px',
@@ -133,32 +139,128 @@ const Traductor = ({ onGoToLogin }) => {
       gridTemplateColumns: '1fr 1fr',
       gap: '30px',
       width: '100%'
-    }
+    },
+    ///  estilos para frases comunes 
+   
+
+    header: {
+      fontSize: "32px",
+      fontWeight: "900",
+      color: "#5a3d2b",
+      marginBottom: "30px",
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      textAlign: "center",
+    },
+
+    grid: {
+      display: "grid",
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "20px",
+      width: "100%",
+      maxWidth: "800px",
+    },
+
+    frasescard: {
+      backgroundColor: "#F5F5F5",
+      borderRadius: "30px",
+      padding: "15px 25px",
+      display: "flex",
+      alignItems: "center",
+      gap: "15px",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+    },
+
+    icon: {
+      fontSize: "30px",
+    },
+
+    textContainer: {
+      display: "flex",
+      flexDirection: "column",
+    },
+
+    espText: {
+      fontSize: "13px",
+      color: "#7a7a7a",
+    },
+
+    runaText: {
+      fontSize: "20px",
+      fontWeight: "bold",
+      color: "#2d5a42",
+      margin: 0,
+    },
   };
+return (
+  <div style={styles.container}>
+    
+    {/* TEXTO DEL ENCABEZADO */}
+    <div style={styles.headerText}>
+      <h1> Traductor De Runa Shimi 🌿
+      </h1>
+      <p>
+        Conecta con las raíces ancestrales a través de la lengua Runa Shimi.
+      </p>
+    </div>
 
-  return (
-    <div style={styles.container}>
+    {/* TARJETA */}
+    <div style={styles.card}>
       
-      {/* TEXTO DEL ENCABEZADO */}
-      <div style={styles.headerText}>
-        <h1 style={{fontSize: isMobile ? '1.8rem' : '2.5rem', fontWeight: '800', margin: '0 0 10px 0'}}>
-          Traductor De Runa Shimi 🌿
-        </h1>
-        <p style={{fontSize: isMobile ? '0.9rem' : '1.1rem', fontWeight: '600', margin: 0}}>
-          Conecta con las raíces ancestrales a través de la lengua Runa Shimi.
-        </p>
-      </div>
+      {isMobile ? (
+        <>
+          <div style={styles.textareaWrapper}>
+            <div style={{alignSelf: 'flex-start'}}>
+              <div style={styles.langLabel}>ESPAÑOL</div>
+            </div>
 
-      {/* TARJETA DINÁMICA */}
-      <div style={styles.card}>
-        
-        {isMobile ? (
-          /* ===============================
-                VERSIÓN MÓVIL (Como la Imagen 2)
-             =============================== */
-          <>
+            <textarea 
+              style={styles.textarea}
+              placeholder="Escribe aquí en español..."
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              maxLength={300}
+            />
+
+            <div style={styles.footerRow}>
+              <span>{text.length}/300</span>
+            </div>
+          </div>
+
+          <div style={styles.swapCircle}>
+            <ArrowLeftRight size={20} />
+          </div>
+
+          <div style={styles.textareaWrapper}>
+            <div style={{alignSelf: 'flex-start'}}>
+              <div style={styles.langLabel}>RUNA SHIMI</div>
+            </div>
+
+            <textarea 
+              style={styles.textarea}
+              placeholder="La traducción aparecerá aquí..."
+              readOnly
+            />
+
+            <div style={styles.footerRow}>
+              <span></span> 
+              <Copy size={18} style={{cursor: 'pointer'}} />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div style={styles.pcHeaderGrid}>
+            <div style={styles.langLabel}>ESPAÑOL</div>
+            <div style={styles.swapCircle}>
+              <ArrowLeftRight size={20} />
+            </div>
+            <div style={styles.langLabel}>RUNA SHIMI</div>
+          </div>
+
+          <div style={styles.pcInputsGrid}>
             <div style={styles.textareaWrapper}>
-              <div style={{alignSelf: 'flex-start'}}><div style={styles.langLabel}>ESPAÑOL</div></div>
               <textarea 
                 style={styles.textarea}
                 placeholder="Escribe aquí en español..."
@@ -166,73 +268,57 @@ const Traductor = ({ onGoToLogin }) => {
                 onChange={(e) => setText(e.target.value)}
                 maxLength={300}
               />
+
               <div style={styles.footerRow}>
                 <span>{text.length}/300</span>
               </div>
             </div>
 
-            <div style={styles.swapCircle}><ArrowLeftRight size={20} /></div>
-
             <div style={styles.textareaWrapper}>
-              <div style={{alignSelf: 'flex-start'}}><div style={styles.langLabel}>RUNA SHIMI</div></div>
               <textarea 
                 style={styles.textarea}
                 placeholder="La traducción aparecerá aquí..."
                 readOnly
               />
+
               <div style={styles.footerRow}>
-                <span></span> 
-                <Copy size={18} style={{cursor: 'pointer'}} />
+                <span></span>
+                <Copy size={20} style={{cursor: 'pointer'}} />
               </div>
             </div>
-          </>
-        ) : (
-          /* ===============================
-                VERSIÓN PC (Lado a Lado)
-             =============================== */
-          <>
-            <div style={styles.pcHeaderGrid}>
-              <div style={styles.langLabel}>ESPAÑOL</div>
-              <div style={styles.swapCircle}><ArrowLeftRight size={20} /></div>
-              <div style={styles.langLabel}>RUNA SHIMI</div>
+          </div>
+        </>
+      )}
+
+      <button style={styles.btnTranslate}>
+        Traducir <RefreshCw size={20} />
+      </button>
+
+    </div>
+
+    {/* =========================
+         FRASES COMUNES
+       ========================= */}
+    <div>
+      <h1 style={styles.header}>
+        Frases Comunes <span>⛰️</span>
+      </h1>
+
+      <div style={styles.grid}>
+        {frases.map((item, index) => (
+          <div key={index} style={styles.frasescard}>
+            <div style={styles.icon}>{item.icon}</div>
+
+            <div style={styles.textContainer}>
+              <span style={styles.espText}>{item.esp}</span>
+              <h2 style={styles.runaText}>{item.runa}</h2>
             </div>
-
-            <div style={styles.pcInputsGrid}>
-              <div style={styles.textareaWrapper}>
-                <textarea 
-                  style={styles.textarea}
-                  placeholder="Escribe aquí en español..."
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  maxLength={300}
-                />
-                <div style={styles.footerRow}>
-                  <span>{text.length}/300</span>
-                </div>
-              </div>
-
-              <div style={styles.textareaWrapper}>
-                <textarea 
-                  style={styles.textarea}
-                  placeholder="La traducción aparecerá aquí..."
-                  readOnly
-                />
-                <div style={styles.footerRow}>
-                  <span></span>
-                  <Copy size={20} style={{cursor: 'pointer'}} />
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-
-        <button style={styles.btnTranslate}>
-          Traducir <RefreshCw size={20} />
-        </button>
-
+          </div>
+        ))}
       </div>
     </div>
-  );
-};
 
+  </div>
+);
+}
 export default Traductor;

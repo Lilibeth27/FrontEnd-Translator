@@ -19,7 +19,7 @@ function App() {
       />
     );
   }
-
+  
   return (
     <AuthPage
       currentView={authView}

@@ -5,8 +5,8 @@ import logo from '../../assets/logo.png';
 const Sidebar = ({ isOpen, onToggle,onGoToLogin }) => {
   const menuItems = [
     { icon: <Languages size={20} />, text: 'Traductor', active: true },
-    { icon: <History size={20} />, text: 'Historial' },
     { icon: <Search size={20} />, text: 'Frases Comunes' },
+    { icon: <History size={20} />, text: 'Historial' },
     { icon: <BookOpen size={20} />, text: 'Diccionario' },
     { icon: <Info size={20} />, text: 'Acerca de Runa Shimi' },
   ];

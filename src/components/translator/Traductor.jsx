@@ -163,7 +163,7 @@ const frases = [
     },
 
     frasescard: {
-      backgroundColor: "#F5F5F5",
+      backgroundColor: "white",
       borderRadius: "30px",
       padding: "15px 25px",
       display: "flex",
@@ -192,7 +192,26 @@ const frases = [
       color: "#2d5a42",
       margin: 0,
     },
-  };
+    //HISTORIAL DE TRADUCCIONES 
+     textareaWrapperHistorial: {
+      width: '80%',
+      display: 'flex',
+    
+      boxSizing: 'border-box'
+  },
+  textareahistorial: {
+      width: '80%',
+      border: '1px solid #ddd',
+      borderRadius: '27px',
+      minHeight: isMobile ? '120px' : '180px',
+      resize: 'none',
+      fontSize: '1rem',
+      boxSizing: 'border-box', 
+      fontFamily: 'inherit',
+      backgroundColor: 'white'
+    },
+
+};
 return (
   <div style={styles.container}>
     
@@ -296,9 +315,7 @@ return (
 
     </div>
 
-    {/* =========================
-         FRASES COMUNES
-       ========================= */}
+    {/*  FRASES COMUNES */}
     <div>
       <h1 style={styles.header}>
         Frases Comunes <span>⛰️</span>
@@ -317,6 +334,14 @@ return (
         ))}
       </div>
     </div>
+    {/* HISTORIAL DE TRADUCCIONES */}
+    <div>
+      <h1 style={styles.header}>
+        Tu Historial de Traducciones <span>📚</span></h1></div>
+       <div style={styles.textareaWrapperHistorial}>
+             <textarea 
+              style={styles.textareahistorial}
+              value={text} /></div>
 
   </div>
 );

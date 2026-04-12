@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeftRight, RefreshCw, Copy } from 'lucide-react';
+import Historial from './Historial';
 
-const Traductor = ({ onGoToLogin }) => {
+
+const Traductor = ({ onGoToLogin}) => {
   const [text, setText] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [historial, setHistorial] = useState([]);//historial de traducciones
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -19,6 +22,7 @@ const frases = [
   { esp: "Bienvenido", runa: "Alli shamushka", icon: "🏠" },
   { esp: "Adiós", runa: "Kaykama", icon: "👋" },
 ];
+
   const styles = {
     // --- CONTENEDOR PRINCIPAL BLINDADO ---
     container: {
@@ -210,9 +214,17 @@ const frases = [
       fontFamily: 'inherit',
       backgroundColor: 'white'
     },
-
+waveSvg: {
+      display: 'block',
+      width: '100%',
+      height: 'auto'
+    },
+    waveShape: {
+      fill: '#C4451C'
+    },
 };
 return (
+  
   <div style={styles.container}>
     
     {/* TEXTO DEL ENCABEZADO */}
@@ -335,15 +347,11 @@ return (
       </div>
     </div>
     {/* HISTORIAL DE TRADUCCIONES */}
-    <div>
-      <h1 style={styles.header}>
-        Tu Historial de Traducciones <span>📚</span></h1></div>
-       <div style={styles.textareaWrapperHistorial}>
-             <textarea 
-              style={styles.textareahistorial}
-              value={text} /></div>
+    
+      <Historial historial={historial} />
 
   </div>
+  
 );
 }
 export default Traductor;

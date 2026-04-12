@@ -1,8 +1,17 @@
 import React from 'react';
 import { Languages, History, Search, BookOpen, Info, LogOut, Menu } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
+import perfil from '../../assets/perfil.avif';
 
-const Sidebar = ({ isOpen, onToggle,onGoToLogin }) => {
+const Sidebar = ({ isOpen, onToggle, onLogout }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    if (onLogout) onLogout();
+    navigate('/');
+  };
   const menuItems = [
     { icon: <Languages size={20} />, text: 'Traductor', active: true },
     { icon: <Search size={20} />, text: 'Frases Comunes' },
@@ -135,7 +144,7 @@ const Sidebar = ({ isOpen, onToggle,onGoToLogin }) => {
         <>
           <div style={styles.profileSection}>
             <div style={styles.avatarRing}>
-              <img src="https://via.placeholder.com/80" alt="Avatar" style={styles.avatar} />
+              <img src={perfil} alt="Avatar" style={styles.avatar} />
             </div>
           </div>
 
@@ -156,8 +165,7 @@ const Sidebar = ({ isOpen, onToggle,onGoToLogin }) => {
           </nav>
 
           <div style={styles.logoutSection}>
-            <div style={styles.navItem}>
-              <div style={styles.navItem} onClick={onGoToLogin}></div>
+            <div style={styles.navItem} onClick={handleLogout}>
               <LogOut size={20} style={styles.navItemIcon} />
               <span>Cerrar Sesión</span>
             </div>

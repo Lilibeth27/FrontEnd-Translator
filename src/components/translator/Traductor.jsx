@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeftRight, RefreshCw, Copy } from 'lucide-react';
 import Historial from './Historial';
+import Diccionario from './Diccionario';
 
 
 const Traductor = ({ onGoToLogin}) => {
   const [text, setText] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
-  const [historial, setHistorial] = useState([]);//historial de traducciones
+  const [historial, setHistorial] = useState([]);
+  const [diccionario, setDiccionario] = useState([]);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -23,17 +25,17 @@ const frases = [
   { esp: "Adiós", runa: "Kaykama", icon: "👋" },
 ];
 
-  const styles = {
+const styles = {
     // --- CONTENEDOR PRINCIPAL BLINDADO ---
     container: {
       flex: 1,
       width: '100%',
-      height: '100vh',
-      overflowY: 'auto',
-      paddingTop: isMobile ? '40px' : '40px',
-      paddingRight: isMobile ? '15px' : '20px',
-      paddingBottom: '20px',
-      paddingLeft: isMobile ? '80px' : '20px', 
+      minHeight: '100vh',
+      overflowY: 'hidden',
+      paddingTop: isMobile ? '2.5rem' : '2.5rem',
+      paddingRight: isMobile ? '0.9375rem' : '1.25rem',
+      paddingBottom: '1.25rem',
+      paddingLeft: isMobile ? '1rem' : '1.25rem', 
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -43,8 +45,8 @@ const frases = [
       textAlign: 'center',
       color: '#5d4037',
       width: '100%',
-      maxWidth: '600px',
-      marginBottom: '25px',
+      maxWidth: '37.5rem',
+      marginBottom: '1.5625rem',
       boxSizing: 'border-box',
       wordWrap: 'break-word',
       overflowWrap: 'break-word', 
@@ -54,11 +56,11 @@ const frases = [
     card: {
       backgroundColor: 'white', 
       width: '100%',
-      maxWidth: '850px', 
-      borderRadius: '30px',
-      padding: isMobile ? '20px' : '35px',
-      boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
-      border: '1px solid #f4e6d4',
+      maxWidth: '53.125rem', 
+      borderRadius: '1.875rem',
+      padding: isMobile ? '1.25rem' : '2.1875rem',
+      boxShadow: '0 0.25rem 0.9375rem rgba(0,0,0,0.05)',
+      border: '0.0625rem solid #f4e6d4',
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column'
@@ -66,12 +68,12 @@ const frases = [
     langLabel: {
       backgroundColor: '#c64c24', 
       color: 'white',
-      padding: '8px 25px',
-      borderRadius: '12px',
+      padding: '0.5rem 1.5625rem',
+      borderRadius: '0.75rem',
       fontWeight: 'bold',
       fontSize: '1rem',
       display: 'inline-block',
-      marginBottom: '10px' 
+      marginBottom: '0.625rem' 
     },
     textareaWrapper: {
       width: '100%',
@@ -81,10 +83,10 @@ const frases = [
     },
     textarea: {
       width: '100%',
-      border: '1px solid #ddd',
-      borderRadius: '15px',
-      padding: '15px',
-      minHeight: isMobile ? '120px' : '180px',
+      border: '0.0625rem solid #ddd',
+      borderRadius: '0.9375rem',
+      padding: '0.9375rem',
+      minHeight: isMobile ? '7.5rem' : '11.25rem',
       outline: 'none',
       resize: 'none',
       fontSize: '1rem',
@@ -97,36 +99,36 @@ const frases = [
       display: 'flex',
       justifyContent: 'space-between', 
       alignItems: 'center',
-      marginTop: '8px',
-      padding: '0 5px',
+      marginTop: '0.5rem',
+      padding: '0 0.3125rem',
       color: '#888',
       fontSize: '0.8rem'
     },
     swapCircle: {
       backgroundColor: 'white',
-      border: '1px solid #f4e6d4',
+      border: '0.0625rem solid #f4e6d4',
       borderRadius: '50%',
-      width: '45px',
-      height: '45px',
+      width: '2.8125rem',
+      height: '2.8125rem',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       color: '#8d6e63',
-      margin: isMobile ? '15px auto' : '0 auto', 
+      margin: isMobile ? '0.9375rem auto' : '0 auto', 
     },
     btnTranslate: {
       backgroundColor: '#3d8c56', 
       color: 'white',
       border: 'none',
-      padding: '12px 35px',
-      borderRadius: '30px',
+      padding: '0.75rem 2.1875rem',
+      borderRadius: '1.875rem',
       fontSize: '1.1rem',
       fontWeight: 'bold',
       display: 'flex',
       alignItems: 'center',
-      gap: '10px',
+      gap: '0.625rem',
       cursor: 'pointer',
-      margin: '25px auto 0'
+      margin: '1.5625rem auto 0'
     },
 
     // --- ESTILOS EXCLUSIVOS PC (GRID) ---
@@ -135,49 +137,53 @@ const frases = [
       gridTemplateColumns: '1fr auto 1fr',
       alignItems: 'center',
       justifyItems: 'center',
-      gap: '20px',
-      marginBottom: '15px'
+      gap: '1.25rem',
+      marginBottom: '0.9375rem'
     },
     pcInputsGrid: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
-      gap: '30px',
+      gap: '1.875rem',
       width: '100%'
     },
     ///  estilos para frases comunes 
    
 
     header: {
-      fontSize: "32px",
+      fontSize: "2rem",
       fontWeight: "900",
       color: "#5a3d2b",
-      marginBottom: "30px",
+      marginBottom: "1.875rem",
       display: "flex",
       alignItems: "center",
-      gap: "10px",
+      gap: "0.625rem",
       textAlign: "center",
     },
 
     grid: {
       display: "grid",
-      gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "20px",
+      gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)",
+      gap: "1.25rem",
       width: "100%",
-      maxWidth: "800px",
+      maxWidth: "50rem",
+      padding: isMobile ? '0 0.5rem' : '0', 
+      boxSizing: 'border-box',
     },
 
     frasescard: {
       backgroundColor: "white",
-      borderRadius: "30px",
-      padding: "15px 25px",
+      width: "100%",
+      maxWidth: isMobile ?  "calc(100% - 2rem)" : "53.124rem",
+      borderRadius: "1.875rem",
+      padding: "0.9375rem 1.5625rem",
       display: "flex",
       alignItems: "center",
-      gap: "15px",
-      boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+      gap: "0.9375rem",
+      boxShadow: "0 0.125rem 0.375rem rgba(0,0,0,0.05)",
     },
 
     icon: {
-      fontSize: "30px",
+      fontSize: "1.875rem",
     },
 
     textContainer: {
@@ -186,12 +192,12 @@ const frases = [
     },
 
     espText: {
-      fontSize: "13px",
+      fontSize: "0.8125rem",
       color: "#7a7a7a",
     },
 
     runaText: {
-      fontSize: "20px",
+      fontSize: "1.25rem",
       fontWeight: "bold",
       color: "#2d5a42",
       margin: 0,
@@ -200,14 +206,14 @@ const frases = [
      textareaWrapperHistorial: {
       width: '80%',
       display: 'flex',
-    
+   
       boxSizing: 'border-box'
   },
   textareahistorial: {
       width: '80%',
-      border: '1px solid #ddd',
-      borderRadius: '27px',
-      minHeight: isMobile ? '120px' : '180px',
+      border: '0.0625rem solid #ddd',
+      borderRadius: '1.6875rem',
+      minHeight: isMobile ? '7.5rem' : '11.25rem',
       resize: 'none',
       fontSize: '1rem',
       boxSizing: 'border-box', 
@@ -349,7 +355,8 @@ return (
     {/* HISTORIAL DE TRADUCCIONES */}
     
       <Historial historial={historial} />
-
+    {/* Diccionario */}
+     <Diccionario />
   </div>
   
 );

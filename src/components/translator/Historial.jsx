@@ -1,3 +1,4 @@
+import { TextAlignCenter } from "lucide-react";
 import React, { useState } from "react";
 
 
@@ -9,9 +10,7 @@ const Historial = () => {
     { esp: "Agua", runa: "Yaku", fecha: "21 Mar, 09:00 AM" },
     { esp: "Sol", runa: "Inti", fecha: "21 Mar, 10:00 AM" },
     { esp: "Luna", runa: "Killa", fecha: "22 Mar, 08:30 AM" },
-    { esp: "Gacias", runa: "Yupaychani", fecha: "19 Mar, 10:30 AM" },
-    { esp: "Hoa", runa: "Imanalla", fecha: "19 Mar, 11:00 AM" },
-    { esp: "tirra", runa: "allpa", fecha: "20 Mar, 10:00 AM" },
+ 
   ]);
 
   // --- LÓGICA DE PAGINACIÓN ---
@@ -35,24 +34,25 @@ const Historial = () => {
   const styles = {
     historialContainer: {
       width: '100%',
-      maxWidth: '800px',
-      marginTop: '30px',
+      maxWidth: '50rem',
+      marginTop: '1.875rem',
     },
     header: {
-      fontSize: '1.5rem',
+      fontSize: '2rem',
       color: '#5b4d49',
-      marginBottom: '20px'
+      marginBottom: '1.25rem',
+      textAlign: 'center',
     },
     cardHistorial: {
       backgroundColor: 'white',
-      borderRadius: '15px',
-      marginBottom: '20px',
+      borderRadius: '0.9375rem',
+      marginBottom: '1.25rem',
       overflow: 'hidden',
-      boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+      boxShadow: '0 0.25rem 0.625rem rgba(0,0,0,0.1)',
     },
     waveTop: {
       width: '100%',
-      height: '20px',
+      height: '1.25rem',
     },
     waveSvg: {
       width: '100%',
@@ -62,40 +62,40 @@ const Historial = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '10px 15px',
+      padding: '0.625rem 0.9375rem',
     },
     leftSection: {
       display: 'flex',
       alignItems: 'center',
-      gap: '8px',
-      minWidth: '130px'
+      gap: '0.5rem',
+      minWidth: '8.125rem'
     },
     fecha: {
-      fontSize: '12px',
+      fontSize: '0.75rem',
       color: '#444'
     },
     textSection: {
       flex: 1,
-      fontSize: '13px',
+      fontSize: '0.8125rem',
       color: '#333'
     },
     actions: {
       display: 'flex',
-      gap: '10px',
-      fontSize: '18px',
+      gap: '0.625rem',
+      fontSize: '1.125rem',
     },
     // --- ESTILOS DE LA PAGINACIÓN ---
     paginationContainer: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: '15px',
-      marginTop: '20px',
-      paddingBottom: '30px'
+      gap: '0.9375rem',
+      marginTop: '1.25rem',
+      paddingBottom: '1.875rem'
     },
     pageButton: {
-      width: '35px',
-      height: '35px',
+      width: '2.1875rem',
+      height: '2.1875rem',
       borderRadius: '50%',
       border: 'none',
       backgroundColor: 'white',
@@ -103,16 +103,16 @@ const Historial = () => {
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-      boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+      boxShadow: '0 0.125rem 0.3125rem rgba(0,0,0,0.1)',
       color: '#5b4d49',
       fontWeight: 'bold',
       transition: '0.3s'
     },
     pageInfo: {
-      fontSize: '18px',
+      fontSize: '1.125rem',
       fontWeight: 'bold',
       color: '#5b4d49',
-      letterSpacing: '2px'
+      letterSpacing: '0.125rem'
     }
   };
 

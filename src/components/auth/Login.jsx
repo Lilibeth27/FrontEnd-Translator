@@ -26,21 +26,21 @@ const Login = ({ onGoToRegister, onGoToRecuperar, onLoginSuccess }) => {
       alignItems: 'center',
       fontFamily: "'Open Sans', sans-serif",
       margin: 0,
-      padding: '20px',
+      padding: '1.25rem',
       boxSizing: 'border-box',
       overflowX: 'hidden'
     },
     card: {
       width: '100%',
-      maxWidth: '600px',
+      maxWidth: '37.5rem',
       backgroundColor: '#FFF4DC',
-      borderRadius: '27px',
+      borderRadius: '1.6875rem',
       position: 'relative',
-      boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+      boxShadow: '0 0.5rem 1rem rgba(0,0,0,0.1)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      paddingBottom: '30px'
+      paddingBottom: '1.875rem'
     },
     waveHeader: {
       width: '100%',
@@ -48,8 +48,8 @@ const Login = ({ onGoToRegister, onGoToRecuperar, onLoginSuccess }) => {
       overflow: 'hidden',
       display: 'flex',
       justifyContent: 'center',
-      borderTopLeftRadius: '27px',
-      borderTopRightRadius: '27px'
+      borderTopLeftRadius: '1.6875rem',
+      borderTopRightRadius: '1.6875rem'
     },
     waveSvg: {
       display: 'block',
@@ -61,69 +61,70 @@ const Login = ({ onGoToRegister, onGoToRecuperar, onLoginSuccess }) => {
     },
     cardBody: {
       width: '100%',
-      padding: '0 20px',
+      padding: '0 1.25rem',
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
     },
     logoWrapper: {
-      marginTop: '-30px',
+      marginTop: '-1.875rem',
       width: '60%',
-      maxWidth: '240px',
-      height: '90px',
+      maxWidth: '15rem',
+      height: '5.625rem',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: '5px',
+      marginBottom: '0.3125rem',
       zIndex: 2
     },
     title: {
-      fontSize: '30px',
+      fontSize: '1.875rem',
       fontWeight: 'bold',
       color: '#5D4037',
-      margin: '0 0 10px 0',
+      margin: '0 0 0.625rem 0',
       textAlign: 'center'
     },
     slogan: {
-      fontSize: '18px',
+      fontSize: '1.125rem',
       fontWeight: '600',
       color: '#5D4037',
-      margin: '0 0 15px 0',
+      margin: '0 0 0.9375rem 0',
       textAlign: 'center'
     },
     form: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      gap: '12px',
+      gap: '0.75rem',
       width: '100%',
       boxSizing: 'border-box'
     },
     inputGroup: {
       width: '100%',
-      maxWidth: '567px',
-      height: '60px',
+      maxWidth: '35.4375rem',
+      height: '3.75rem',
       backgroundColor: '#F9FAFB',
-      borderRadius: '100px',
-      border: '2px solid #5D4037',
+      borderRadius: '6.25rem',
+      border: '0.125rem solid #5D4037',
       display: 'flex',
       alignItems: 'center',
-      padding: '0 20px',
+      padding: '0 1.25rem',
       boxSizing: 'border-box'
     },
     iconWrapper: {
-      width: '20px',
-      height: '20px',
-      marginRight: '12px',
+      width: '1.5rem',
+      height: '1.5rem',
+      marginRight: '0.75rem',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      flexShrink: 0,
     },
     eyeIconWrapper: {
-      width: '24px',
-      height: '24px',
-      marginLeft: '12px',
+      width: '1.5rem',
+      height: '1.5rem',
+      marginLeft: '0.75rem',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -134,47 +135,47 @@ const Login = ({ onGoToRegister, onGoToRecuperar, onLoginSuccess }) => {
       border: 'none',
       backgroundColor: 'transparent',
       outline: 'none',
-      fontSize: '18px',
+      fontSize: '1.125rem',
       color: '#5D4037'
     },
     controlsRow: {
       width: '100%',
-      maxWidth: '567px',
+      maxWidth: '35.4375rem',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginTop: '5px',
-      marginBottom: '20px'
+      marginTop: '0.3125rem',
+      marginBottom: '1.25rem'
     },
     checkboxWrapper: {
       display: 'flex',
       alignItems: 'center',
-      gap: '10px',
-      fontSize: '16px',
+      gap: '0.625rem',
+      fontSize: '1rem',
       color: '#735240',
       cursor: 'pointer'
     },
     forgotPassword: {
-      fontSize: '16px',
+      fontSize: '1rem',
       color: '#735240',
       textDecoration: 'none',
       cursor: 'pointer'
     },
     submitBtn: {
       width: '100%',
-      maxWidth: '567px',
-      height: '60px',
+      maxWidth: '35.4375rem',
+      height: '3.75rem',
       backgroundColor: '#C7856A',
-      borderRadius: '27px',
+      borderRadius: '1.6875rem',
       border: 'none',
-      fontSize: '22px',
+      fontSize: '1.375rem',
       fontWeight: 'bold',
       color: '#FFFFFF',
       cursor: 'pointer',
-      marginBottom: '25px'
+      marginBottom: '1.5625rem'
     },
     registerText: {
-      fontSize: '16px',
+      fontSize: '1rem',
       color: '#000000',
       margin: 0,
       textAlign: 'center'
@@ -184,13 +185,14 @@ const Login = ({ onGoToRegister, onGoToRecuperar, onLoginSuccess }) => {
       cursor: 'pointer'
     },
     checkbox:{
-      width: '16px',
-      height: '16px',
-      border: '2px solid #5D4037',
-      borderRadius: '4px',
+      width: '1rem',
+      height: '1rem',
+      border: '0.125rem solid #5D4037',
+      borderRadius: '0.25rem',
       backgroundColor: '#F9FAFB',
       cursor: 'pointer'
     },
+   
   };
 
   return (

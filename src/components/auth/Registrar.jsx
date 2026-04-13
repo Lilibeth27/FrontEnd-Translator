@@ -27,21 +27,21 @@ const Registrar = ({ onGoToLogin }) => {
       justifyContent: 'center',
       alignItems: 'center',
       margin: 0,
-      padding: '20px',
+      padding: '1.25rem',
       boxSizing: 'border-box',
       overflowX: 'hidden'
     },
     card: {
       width: '100%',
-      maxWidth: '600px',
+      maxWidth: '37.5rem',
       backgroundColor: '#FFF4DC',
-      borderRadius: '27px',
+      borderRadius: '1.6875rem',
       position: 'relative',
-      boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+      boxShadow: '0 0.5rem 1rem rgba(0,0,0,0.1)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      paddingBottom: '30px'
+      paddingBottom: '1.875rem'
     },
     waveHeader: {
       width: '100%',
@@ -49,8 +49,8 @@ const Registrar = ({ onGoToLogin }) => {
       overflow: 'hidden',
       display: 'flex',
       justifyContent: 'center',
-      borderTopLeftRadius: '27px',
-      borderTopRightRadius: '27px'
+      borderTopLeftRadius: '1.6875rem',
+      borderTopRightRadius: '1.6875rem'
     },
     waveSvg: {
       display: 'block',
@@ -62,69 +62,69 @@ const Registrar = ({ onGoToLogin }) => {
     },
     cardBody: {
       width: '100%',
-      padding: '0 20px',
+      padding: '0 1.25rem',
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
     },
     logoWrapper: {
-      marginTop: '-70px',
+      marginTop: '-4.375rem',
       width: '60%',
-      maxWidth: '240px',
-      height: '90px',
+      maxWidth: '15rem',
+      height: '5.625rem',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: '5px',
+      marginBottom: '0.3125rem',
       zIndex: 2
     },
     title: {
-      fontSize: '30px',
+      fontSize: '1.875rem',
       fontWeight: 'bold',
       color: '#5D4037',
-      margin: '0 0 10px 0',
+      margin: '0 0 0.625rem 0',
       textAlign: 'center'
     },
     slogan: {
-      fontSize: '18px',
+      fontSize: '1.125rem',
       fontWeight: '600',
       color: '#5D4037',
-      margin: '0 0 15px 0',
+      margin: '0 0 0.9375rem 0',
       textAlign: 'center'
     },
     form: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      gap: '12px',
+      gap: '0.75rem',
       width: '100%',
       boxSizing: 'border-box'
     },
     inputGroup: {
       width: '100%',
-      maxWidth: '557px',
-      height: '40px',
+      maxWidth: '34.8125rem',
+      height: '2.5rem',
       backgroundColor: '#F9FAFB',
-      borderRadius: '100px',
-      border: '2px solid #5D4037',
+      borderRadius: '6.25rem',
+      border: '0.125rem solid #5D4037',
       display: 'flex',
       alignItems: 'center',
-      padding: '0 20px',
+      padding: '0 1.25rem',
       boxSizing: 'border-box'
     },
     iconWrapper: {
-      width: '20px',
-      height: '20px',
-      marginRight: '12px',
+      width: '1.25rem',
+      height: '1.25rem',
+      marginRight: '0.75rem',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
     },
     eyeIconWrapper: {
-      width: '24px',
-      height: '24px',
-      marginLeft: '12px',
+      width: '1.5rem',
+      height: '1.5rem',
+      marginLeft: '0.75rem',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -135,37 +135,37 @@ const Registrar = ({ onGoToLogin }) => {
       border: 'none',
       backgroundColor: 'transparent',
       outline: 'none',
-      fontSize: '16px',
+      fontSize: '1rem',
       color: '#5D4037',
       fontWeight: '600'
     },
     termsText: {
       width: '100%',
-      maxWidth: '567px',
-      fontSize: '13px',
+      maxWidth: '35.4375rem',
+      fontSize: '0.8125rem',
       color: '#5D4037',
       textAlign: 'left',
-      margin: '5px 0 15px 0',
-      paddingLeft: '10px'
+      margin: '0.3125rem 0 0.9375rem 0',
+      paddingLeft: '0.625rem'
     },
     boldText: {
       fontWeight: 'bold'
     },
     submitBtn: {
       width: '100%',
-      maxWidth: '545px',
-      height: '60px',
+      maxWidth: '34.0625rem',
+      height: '3.75rem',
       backgroundColor: '#C7856A',
-      borderRadius: '27px',
+      borderRadius: '1.6875rem',
       border: 'none',
-      fontSize: '22px',
+      fontSize: '1.375rem',
       fontWeight: 'bold',
       color: '#FFFFFF',
       cursor: 'pointer',
-      marginBottom: '20px'
+      marginBottom: '1.25rem'
     },
     loginText: {
-      fontSize: '15px',
+      fontSize: '0.9375rem',
       color: '#5D4037',
       margin: 0,
       textAlign: 'center'

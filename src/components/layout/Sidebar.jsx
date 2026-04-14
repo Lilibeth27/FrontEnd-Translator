@@ -29,30 +29,40 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
   ];
   
   const styles = {
+    wrapper: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      zIndex: 1000,
+      pointerEvents: isOpen ? 'auto' : 'none',
+      overflow: 'hidden',
+    },
     sidebar: {
       display: 'flex',
       flexDirection: 'column',
-      height: '100dvh', // Usamos dvh para mejor soporte en navegadores móviles
+      height: '100%',
       backgroundColor: '#F4E6D4',
-      position: 'fixed',
+      position: 'absolute',
       left: 0,
       top: 0,
       boxSizing: 'border-box',
-      zIndex: 1000,
+      zIndex: 1001,
       transition: 'transform 0.3s ease',
-      overflowY: 'auto', // Permite scroll si el contenido es muy alto
-      overflowX: 'hidden'
+      overflowY: 'auto',
+      boxShadow: isOpen ? '4px 0 10px rgba(0,0,0,0.1)' : 'none',
     },
     sidebarOpen: {
       width: isMobile ? '85vw' : '15.625rem',
       maxWidth: isMobile ? '20rem' : '15.625rem',
-      padding: isMobile ? '1rem' : '1.25rem',
+      padding: isMobile ? '1.25rem' : '1.25rem',
       transform: 'translateX(0)'
     },
     sidebarClosed: {
       width: isMobile ? '85vw' : '3.75rem',
       maxWidth: isMobile ? '20rem' : '3.75rem',
-      padding: isMobile ? '1rem' : '1rem 0.625rem',
+      padding: isMobile ? '0.5rem' : '1rem 0.625rem',
       transform: isMobile ? 'translateX(-100%)' : 'translateX(0)'
     },
     header: {
@@ -61,7 +71,7 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       justifyContent: 'space-between',
       gap: '0.625rem',
       marginBottom: '1rem',
-      flexShrink: 0 // Evita que el header se aplaste
+      flexShrink: 0
     },
     hamburger: {
       cursor: 'pointer',
@@ -94,8 +104,8 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       flexShrink: 0
     },
     avatarRing: {
-      width: isMobile ? '3.5rem' : '6.25rem', // Un poco más pequeño en móvil
-      height: isMobile ? '3.5rem' : '6.25rem',
+      width: isMobile ? '4rem' : '6.25rem',
+      height: isMobile ? '4rem' : '6.25rem',
       borderRadius: '50%',
       border: '0.1875rem solid #4a3728',
       overflow: 'hidden'
@@ -109,8 +119,9 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       display: 'flex',
       flexDirection: 'column',
       gap: '0.3125rem',
-      flex: 1, // Esto empuja el logout hacia abajo
-      minHeight: 'min-content' 
+      flex: 1, 
+      minHeight: 0,
+      overflowY: 'auto'
     },
     menuTitle: {
       fontSize: '0.75rem',
@@ -128,7 +139,7 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       color: '#5d4037',
       textDecoration: 'none',
       borderRadius: '0.5rem',
-      fontSize: isMobile ? '0.9rem' : '0.875rem'
+      fontSize: isMobile ? '1rem' : '0.875rem'
     },
     navItemActive: {
       backgroundColor: 'rgba(0,0,0,0.05)',
@@ -139,9 +150,9 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       flexShrink: 0
     },
     logoutSection: {
-      marginTop: 'auto', // Empuja al final del flex
+      marginTop: 'auto',
       paddingTop: '1rem',
-      paddingBottom: isMobile ? '1rem' : '0', // Espacio extra abajo en móviles
+      paddingBottom: '1rem',
       borderTop: '0.0625rem solid rgba(0,0,0,0.1)',
       flexShrink: 0
     },
@@ -149,7 +160,7 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       position: 'fixed',
       top: '1rem',
       left: '1rem',
-      zIndex: 999,
+      zIndex: 900,
       backgroundColor: '#C4451C',
       borderRadius: '50%',
       padding: '0.75rem',
@@ -158,6 +169,15 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
+    },
+    overlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0,0,0,0.5)',
+      zIndex: 1000
     }
   };
 
@@ -168,75 +188,73 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
 
   return (
     <>
-      {!isOpen && (
+      {!isOpen && isMobile && (
         <div style={styles.menuButton} onClick={onToggle}>
-          <Menu size={isMobile ? 28 : 24} color="white" />
+          <Menu size={28} color="white" />
         </div>
       )}
       
-      <div style={sidebarStyle}>
-        <div style={styles.header}>
-          {isMobile && isOpen ? (
-            <X style={styles.closeButton} size={isMobile ? 28 : 24} onClick={onToggle} />
-          ) : (
-            <Menu style={styles.hamburger} size={isMobile ? 28 : 24} onClick={onToggle} />
-          )}
-          {isOpen && (
-            <div style={styles.logoContainer}>
-              <img src={logo} alt="Runa Logo" style={styles.mainLogo} />
-              <span style={styles.brandName}>RUNA SHIMI</span>
-            </div>
-          )}
-        </div>
-
-        {isOpen && (
-          <>
-            <div style={styles.profileSection}>
-              <div style={styles.avatarRing}>
-                <img src={perfil} alt="Avatar" style={styles.avatar} />
+      <div style={styles.wrapper}>
+        <div style={sidebarStyle}>
+          <div style={styles.header}>
+            {isMobile && isOpen ? (
+              <X style={styles.closeButton} size={28} onClick={onToggle} />
+            ) : (
+              <Menu style={styles.hamburger} size={isMobile ? 28 : 24} onClick={onToggle} />
+            )}
+            {isOpen && (
+              <div style={styles.logoContainer}>
+                <img src={logo} alt="Runa Logo" style={styles.mainLogo} />
+                <span style={styles.brandName}>RUNA SHIMI</span>
               </div>
-            </div>
+            )}
+          </div>
 
-            <nav style={styles.navMenu}>
-              <p style={styles.menuTitle}>MENU</p>
-              {menuItems.map((item, index) => (
-                <div 
-                  key={index} 
-                  style={{
-                    ...styles.navItem,
-                    ...(item.active ? styles.navItemActive : {})
-                  }}
-                >
-                  <span style={styles.navItemIcon}>{item.icon}</span>
-                  <span>{item.text}</span>
+          {isOpen && (
+            <>
+              <div style={styles.profileSection}>
+                <div style={styles.avatarRing}>
+                  <img src={perfil} alt="Avatar" style={styles.avatar} />
                 </div>
-              ))}
-            </nav>
-          </>
-        )}
-        
-        <div style={styles.logoutSection}>
-          <div style={styles.navItem} onClick={handleLogout}>
-            <LogOut size={20} style={styles.navItemIcon} />
-            <span>Cerrar Sesión</span>
+              </div>
+
+              <nav style={styles.navMenu}>
+                <p style={styles.menuTitle}>MENU</p>
+                {menuItems.map((item, index) => (
+                  <div 
+                    key={index} 
+                    style={{
+                      ...styles.navItem,
+                      ...(item.active ? styles.navItemActive : {})
+                    }}
+                  >
+                    <span style={styles.navItemIcon}>{item.icon}</span>
+                    <span>{item.text}</span>
+                  </div>
+                ))}
+              </nav>
+            </>
+          )}
+          
+          <div style={styles.logoutSection}>
+            <div 
+              style={{
+                ...styles.navItem,
+                justifyContent: isOpen ? 'flex-start' : 'center',
+                padding: isOpen ? '0.75rem' : '0.75rem 0'
+              }} 
+              onClick={handleLogout}
+            >
+              <LogOut size={20} style={styles.navItemIcon} />
+              {isOpen && <span>Cerrar Sesión</span>}
+            </div>
           </div>
         </div>
+        
+        {isMobile && isOpen && (
+          <div style={styles.overlay} onClick={onToggle} />
+        )}
       </div>
-      
-      {isMobile && isOpen && (
-        <div 
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            zIndex: 999
-          }} 
-          onClick={onToggle}
-        />
-      )}
     </>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeftRight, RefreshCw, Copy } from 'lucide-react';
 import Historial from './Historial';
 import Diccionario from './Diccionario';
+import Acerca from './Acerca'
 
 
 const Traductor = ({ onGoToLogin}) => {
@@ -31,7 +32,7 @@ const styles = {
       flex: 1,
       width: '100%',
       minHeight: '100vh',
-      overflowY: 'hidden',
+      overflowY: 'auto',
       paddingTop: isMobile ? '2.5rem' : '2.5rem',
       paddingRight: isMobile ? '0.9375rem' : '1.25rem',
       paddingBottom: '1.25rem',
@@ -357,6 +358,8 @@ return (
       <Historial historial={historial} />
     {/* Diccionario */}
      <Diccionario />
+     {/* Acerca */}
+      <Acerca />
   </div>
   
 );

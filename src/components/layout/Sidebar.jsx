@@ -1,10 +1,10 @@
 import React from 'react';
 import { Languages, History, Search, BookOpen, Info, LogOut, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.png';
-import perfil from '../../assets/perfil.avif';
+import logo from '../../assets/logo.png'; 
+import perfil from '../../assets/perfil.avif'; 
 
-const Sidebar = ({ isOpen, onToggle, onLogout, vistaActual, onCambioVista }) => {
+const Sidebar = ({ isOpen, onToggle, onLogout, vistaActual, onCambioVista, isMobile }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -13,10 +13,6 @@ const Sidebar = ({ isOpen, onToggle, onLogout, vistaActual, onCambioVista }) => 
     navigate('/');
   };
 
-  const handleMenuClick = (vista) => {
-    if (onCambioVista) onCambioVista(vista);
-  };
-  
   const menuItems = [
     { icon: <Languages size={20} />, text: 'Traductor', vista: 'traductor' },
     { icon: <Search size={20} />, text: 'Frases Comunes', vista: 'frases' },
@@ -24,170 +20,103 @@ const Sidebar = ({ isOpen, onToggle, onLogout, vistaActual, onCambioVista }) => 
     { icon: <BookOpen size={20} />, text: 'Diccionario', vista: 'diccionario' },
     { icon: <Info size={20} />, text: 'Acerca de Runa Shimi', vista: 'acerca' },
   ];
-  
+
   const styles = {
     sidebar: {
       display: 'flex',
       flexDirection: 'column',
       height: '100vh',
-      backgroundColor: '#F4E6D4',
+      backgroundColor: '#EBE0D0', 
       position: 'fixed',
       left: 0,
       top: 0,
+      zIndex: 1100, 
       boxSizing: 'border-box',
-      overflow: 'hidden',
-      transition: 'width 0.3s ease',
-      zIndex: 1000
-    },
-    sidebarOpen: {
-      width: '15.625rem',
-      padding: '1.25rem'
-    },
-    sidebarClosed: {
-      width: '3.75rem',
-      padding: '1rem 0.625rem',
-      alignItems: 'center'
+      width: isMobile ? '80%' : (isOpen ? '15.625rem' : '3.75rem'),
+      maxWidth: '300px',
+      transform: isMobile ? (isOpen ? 'translateX(0)' : 'translateX(-100%)') : 'none',
+      transition: 'transform 0.3s ease, width 0.3s ease',
+      padding: isOpen || isMobile ? '1.5rem 1rem' : '1rem 0.5rem',
+      boxShadow: isOpen ? '4px 0 15px rgba(0,0,0,0.1)' : 'none',
     },
     header: {
       display: 'flex',
       alignItems: 'center',
-      gap: '0.625rem',
-      marginBottom: '1.25rem'
-    },
-    hamburger: {
-      cursor: 'pointer',
-      color: '#5d4037',
-      minWidth: '1.5rem'
-    },
-    logoContainer: {
-      display: 'flex',
-      alignItems: 'center'
-    },
-    mainLogo: {
-      width: '3rem',
-      height: 'auto'
-    },
-    brandName: {
-      fontWeight: 'bold',
-      color: '#5d4037',
-      marginLeft: '0.5rem'
-    },
-    profileSection: {
-      display: 'flex',
-      justifyContent: 'center',
-      margin: '1.25rem 0'
-    },
-    avatarRing: {
-      width: '6.25rem',
-      height: '6.25rem',
-      borderRadius: '50%',
-      border: '0.1875rem solid #4a3728',
-      overflow: 'hidden'
-    },
-    avatar: {
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover'
-    },
-    navMenu: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '0.3125rem',
-      flex: 1,
-      overflowY: 'auto'
-    },
-    menuTitle: {
-      fontSize: '0.75rem',
-      fontWeight: '800',
-      marginBottom: '1rem',
-      color: '#2e1f1a'
+      gap: '0.8rem',
+      marginBottom: '2rem',
+      justifyContent: (!isOpen && !isMobile) ? 'center' : 'flex-start'
     },
     navItem: {
       display: 'flex',
       alignItems: 'center',
       gap: '1rem',
-      padding: '0.625rem',
+      padding: '0.8rem',
       cursor: 'pointer',
       fontWeight: '600',
       color: '#5d4037',
-      textDecoration: 'none',
-      borderRadius: '0.5rem'
+      borderRadius: '0.5rem',
+      marginBottom: '0.2rem',
+      whiteSpace: 'nowrap'
     },
     navItemActive: {
-      backgroundColor: 'rgba(191, 54, 12, 0.15)',
-      borderRadius: '0.5rem',
+      backgroundColor: 'rgba(191, 54, 12, 0.1)',
       color: '#bf360c'
-    },
-    navItemIcon: {
-      color: '#bf360c',
-      flexShrink: 0
-    },
-    logoutSection: {
-      marginTop: 'auto',
-      paddingTop: '1rem',
-      borderTop: '0.0625rem solid rgba(0,0,0,0.1)'
     }
   };
 
-  const sidebarStyle = {
-    ...styles.sidebar,
-    ...(isOpen ? styles.sidebarOpen : styles.sidebarClosed)
-  };
-
   return (
-    <div style={sidebarStyle}>
+    <div style={styles.sidebar}>
+      
+      {/* Encabezado con Logo */}
       <div style={styles.header}>
-        <Menu style={styles.hamburger} onClick={onToggle} />
-        {isOpen && (
-          <div style={styles.logoContainer}>
-            <img src={logo} alt="Runa Logo" style={styles.mainLogo} />
-            <span style={styles.brandName}>RUNA SHIMI</span>
+        <Menu style={{ cursor: 'pointer', color: '#5d4037', minWidth: '24px' }} onClick={onToggle} />
+        {(isOpen || isMobile) && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img src={logo} alt="Logo Runa Shimi" style={{ width: '40px', height: 'auto' }} />
+            <span style={{ fontWeight: '900', color: '#5d4037', letterSpacing: '1px' }}>RUNA SHIMI</span>
           </div>
         )}
       </div>
-
-      {isOpen && (
-        <>
-          <div style={styles.profileSection}>
-            <div style={styles.avatarRing}>
-              <img src={perfil} alt="Avatar" style={styles.avatar} />
+      {(isOpen || isMobile) && (
+        <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto' }}>
+          
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+            <div style={{ width: '80px', height: '80px', borderRadius: '50%', border: '3px solid #5d4037', overflow: 'hidden' }}>
+              <img src={perfil} alt="Perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           </div>
 
-          <nav style={styles.navMenu}>
-            <p style={styles.menuTitle}>MENU DE NAVEGACION</p>
-            {menuItems.map((item, index) => {
-              const isActive = vistaActual === item.vista;
-              return (
-                <div 
-                  key={index} 
-                  style={{
-                    ...styles.navItem,
-                    ...(isActive ? styles.navItemActive : {})
-                  }}
-                  onClick={() => handleMenuClick(item.vista)}
-                >
-                  <span style={styles.navItemIcon}>{item.icon}</span>
-                  <span>{item.text}</span>
-                </div>
-              );
-            })}
+          <p style={{ fontSize: '0.75rem', fontWeight: '800', color: '#2e1f1a', marginBottom: '1rem', paddingLeft: '0.5rem' }}>
+            MENU DE NAVEGACION
+          </p>
+
+          <nav>
+            {menuItems.map((item, index) => (
+              <div 
+                key={index} 
+                style={{ ...styles.navItem, ...(vistaActual === item.vista ? styles.navItemActive : {}) }}
+                onClick={() => {
+                  onCambioVista(item.vista);
+                  if (isMobile) onToggle(); 
+                }}
+              >
+                {item.icon}
+                <span>{item.text}</span>
+              </div>
+            ))}
           </nav>
-        </>
+
+        </div>
       )}
-      
-      <div style={styles.logoutSection}>
-        <div 
-          style={{
-            ...styles.navItem,
-            justifyContent: isOpen ? 'flex-start' : 'center'
-          }} 
-          onClick={handleLogout}
-        >
-          <LogOut size={20} style={styles.navItemIcon} />
-          {isOpen && <span>Cerrar Sesión</span>}
+
+      {/* Botón Cerrar Sesión */}
+      <div style={{ marginTop: 'auto', borderTop: '1px solid rgba(93, 64, 55, 0.2)', paddingTop: '1rem' }}>
+        <div style={{ ...styles.navItem, justifyContent: (!isOpen && !isMobile) ? 'center' : 'flex-start' }} onClick={handleLogout}>
+          <LogOut size={20} style={{ minWidth: '24px' }} />
+          {(isOpen || isMobile) && <span>Cerrar Sesión</span>}
         </div>
       </div>
+
     </div>
   );
 };

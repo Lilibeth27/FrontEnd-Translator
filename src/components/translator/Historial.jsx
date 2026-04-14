@@ -1,34 +1,40 @@
-import { TextAlignCenter } from "lucide-react";
 import React, { useState } from "react";
-
+import { Copy, Check } from 'lucide-react'; // Importamos los iconos
 
 const Historial = () => {
-  const [historial, setHistorial] = useState([
-    { esp: "Gracias", runa: "Yupaychani", fecha: "19 Mar, 10:30 AM" },
-    { esp: "Hola", runa: "Imanalla", fecha: "19 Mar, 11:00 AM" },
-    { esp: "tierra", runa: "allpa", fecha: "20 Mar, 10:00 AM" },
-    { esp: "Agua", runa: "Yaku", fecha: "21 Mar, 09:00 AM" },
-    { esp: "Sol", runa: "Inti", fecha: "21 Mar, 10:00 AM" },
-    { esp: "Luna", runa: "Killa", fecha: "22 Mar, 08:30 AM" },
- 
+  const [historial] = useState([
+    { id: 1, esp: "Gracias", runa: "Yupaychani", fecha: "19 Mar, 10:30 AM" },
+    { id: 2, esp: "Hola", runa: "Imanalla", fecha: "19 Mar, 11:00 AM" },
+    { id: 3, esp: "tierra", runa: "allpa", fecha: "20 Mar, 10:00 AM" },
+    { id: 4, esp: "Agua", runa: "Yaku", fecha: "21 Mar, 09:00 AM" },
+    { id: 5, esp: "Sol", runa: "Inti", fecha: "21 Mar, 10:00 AM" },
+    { id: 6, esp: "Luna", runa: "Killa", fecha: "22 Mar, 08:30 AM" },
   ]);
+
+  // --- ESTADO PARA FEEDBACK DE COPIADO ---
+  const [copiedId, setCopiedId] = useState(null);
 
   // --- LÓGICA DE PAGINACIÓN ---
   const [paginaActual, setPaginaActual] = useState(1);
   const itemsPorPagina = 3;
 
-  // Calculamos los índices
   const ultimoIndice = paginaActual * itemsPorPagina;
   const primerIndice = ultimoIndice - itemsPorPagina;
   const itemsActuales = historial.slice(primerIndice, ultimoIndice);
   const totalPaginas = Math.ceil(historial.length / itemsPorPagina);
 
-  const irSiguiente = () => {
-    if (paginaActual < totalPaginas) setPaginaActual(paginaActual + 1);
-  };
+  const irSiguiente = () => { if (paginaActual < totalPaginas) setPaginaActual(paginaActual + 1); };
+  const irAnterior = () => { if (paginaActual > 1) setPaginaActual(paginaActual - 1); };
 
-  const irAnterior = () => {
-    if (paginaActual > 1) setPaginaActual(paginaActual - 1);
+  // --- FUNCIÓN PARA COPIAR ---
+  const handleCopy = async (id, text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (err) {
+      console.error("Error al copiar", err);
+    }
   };
 
   const styles = {
@@ -83,10 +89,13 @@ const Historial = () => {
     },
     actions: {
       display: 'flex',
-      gap: '0.625rem',
-      fontSize: '1.125rem',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer',
+      color: '#8e8e8e', 
+      transition: '0.2s',
+      padding: '5px',
     },
-    // --- ESTILOS DE LA PAGINACIÓN ---
     paginationContainer: {
       display: 'flex',
       alignItems: 'center',
@@ -125,7 +134,7 @@ const Historial = () => {
       </h1>
 
       {itemsActuales.map((item, index) => (
-        <div key={index} style={styles.cardHistorial}>
+        <div key={item.id || index} style={styles.cardHistorial}>
           <div style={{
             ...styles.waveTop,
             backgroundColor: index % 3 === 0 ? '#C4451C' : index % 3 === 1 ? '#4A7C59' : '#5b4d49'
@@ -141,18 +150,26 @@ const Historial = () => {
               <span style={styles.fecha}>{item.fecha}</span>
             </div>
             <div style={styles.textSection}>
-              <p><strong>Español:</strong> {item.esp}</p>
-              <p><strong>Runa Shimi:</strong> {item.runa}</p>
+              <p style={{ margin: '2px 0' }}><strong>Español:</strong> {item.esp}</p>
+              <p style={{ margin: '2px 0' }}><strong>Runa Shimi:</strong> {item.runa}</p>
             </div>
-            <div style={styles.actions}>
-              <span>❤️</span>
-              <span>📋</span>
+            
+            {/* BOTÓN DE COPIAR REEMPLAZANDO EL EMOJI */}
+            <div 
+              style={styles.actions} 
+              onClick={() => handleCopy(item.id || index, item.runa)}
+              title="Copiar traducción"
+            >
+              {copiedId === (item.id || index) ? (
+                <Check size={18} color="#4A7C59" />
+              ) : (
+                <Copy size={18} />
+              )}
             </div>
           </div>
         </div>
       ))}
 
-      {/* CONTROLES DE PAGINACIÓN */}
       <div style={styles.paginationContainer}>
         <button 
           onClick={irAnterior} 
@@ -163,7 +180,7 @@ const Historial = () => {
         </button>
 
         <span style={styles.pageInfo}>
-          {paginaActual} {paginaActual + 1} ...
+          {paginaActual} {paginaActual + 1 <= totalPaginas ? paginaActual + 1 : ''} ...
         </span>
 
         <button 

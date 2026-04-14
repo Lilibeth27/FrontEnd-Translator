@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../../assets/logo.png';
 
 const Login = ({ onGoToRegister, onGoToRecuperar, onLoginSuccess }) => {
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [mostrarContrasena, setMostrarContrasena] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -113,8 +120,8 @@ const Login = ({ onGoToRegister, onGoToRecuperar, onLoginSuccess }) => {
       boxSizing: 'border-box'
     },
     iconWrapper: {
-      width: '1.5rem',
-      height: '1.5rem',
+      width: isMobile ? '1.75rem' : '1.5rem',
+      height: isMobile ? '1.75rem' : '1.5rem',
       marginRight: '0.75rem',
       display: 'flex',
       alignItems: 'center',
@@ -122,8 +129,8 @@ const Login = ({ onGoToRegister, onGoToRecuperar, onLoginSuccess }) => {
       flexShrink: 0,
     },
     eyeIconWrapper: {
-      width: '1.5rem',
-      height: '1.5rem',
+      width: isMobile ? '1.75rem' : '1.5rem',
+      height: isMobile ? '1.75rem' : '1.5rem',
       marginLeft: '0.75rem',
       display: 'flex',
       alignItems: 'center',

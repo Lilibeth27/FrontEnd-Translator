@@ -34,7 +34,7 @@ const Acerca = () => {
     headerText: {
       fontSize: '2rem',
       fontWeight: '900',
-      color: '#5a3d2b', // Tono café acorde a tu paleta
+      color: '#5a3d2b', 
       margin: 0,
     },
     iconCircle: {
@@ -56,7 +56,7 @@ const Acerca = () => {
     },
     card: {
       backgroundColor: 'white',
-      borderRadius: '1.875rem', // Mismo borde de tus Frases Comunes
+      borderRadius: '1.875rem', 
       boxShadow: '0 0.125rem 0.375rem rgba(0,0,0,0.05)',
       overflow: 'hidden',
       display: 'flex',
@@ -137,7 +137,7 @@ const Acerca = () => {
       color: '#c64c24',
       text: 'El Runa Shimi es hablado por millones de personas en Ecuador, Perú, Bolivia y Colombia. Es la lengua del pueblo Inca y sus descendientes. 🦙',
       icon: '⛰️',
-      // SVG personalizado para simular la "mancha" de la foto
+      
       svg: (
         <svg viewBox="0 0 100 45" preserveAspectRatio="none" style={styles.blobSvg}>
           <path d="M0,0 L100,0 L100,20 C85,35 75,5 50,25 C25,45 15,10 0,20 Z" fill="#c64c24"/>

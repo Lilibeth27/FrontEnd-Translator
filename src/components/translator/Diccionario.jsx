@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Search, Copy } from 'lucide-react';
+import { Search, Copy, Check } from 'lucide-react'; // Añadimos Check para el feedback
 
 const Diccionario = () => {
   // --- ESTADOS ---
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [searchTerm, setSearchTerm] = useState("");
   const [paginaActual, setPaginaActual] = useState(1);
+  const [copiedId, setCopiedId] = useState(null); // Estado para feedback visual
 
   // Datos de ejemplo
   const [palabras] = useState([
@@ -20,6 +21,17 @@ const Diccionario = () => {
   ]);
 
   const alfabet = ["A", "ch", "h", "k", "l", "ll", "m", "n", "ñ", "p", "r", "s", "sh", "t", "ts", "w", "y"];
+
+  // --- FUNCION COPIAR ---
+  const handleCopy = async (id, text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedId(id); // Marca este ID como copiado
+      setTimeout(() => setCopiedId(null), 2000); // Quita el check después de 2 seg
+    } catch (err) {
+      console.error("Error al copiar", err);
+    }
+  };
 
   // --- RESPONSIVE ---
   useEffect(() => {
@@ -44,134 +56,38 @@ const Diccionario = () => {
   const irAnterior = () => { if (paginaActual > 1) setPaginaActual(paginaActual - 1); };
 
   const styles = {
-    container: {
-      width: '100%',
-      maxWidth: '65rem',
-      margin: '0 auto',
-      padding: isMobile ? '1rem' : '2rem',
-      
-      minHeight: '100vh',
-      boxSizing: 'border-box'
-    },
-    headerTitle: {
-      fontSize: isMobile ? '1.8rem' : '2.5rem',
-      fontWeight: '900',
-      color: '#5D4037',
-      textAlign: 'center',
-      marginBottom: '1.5rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '10px'
-    },
-    searchBox: {
-      position: 'relative',
-      width: '100%',
-      maxWidth: '50rem',
-      margin: '0 auto 1.5rem auto'
-    },
-    input: {
-      width: '100%',
-      padding: isMobile ? '0.8rem 1rem 0.8rem 3rem' : '1rem 7rem 1rem 3.5rem',
-      borderRadius: '50px',
-      border: '2px solid #5D4037',
-      fontSize: '1rem',
-      outline: 'none',
-      boxSizing: 'border-box'
-    },
-    btnBuscar: {
-      position: 'absolute',
-      right: '5px',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      backgroundColor: '#F4E6D4',
-      border: '1.5px solid #5D4037',
-      borderRadius: '25px',
-      padding: '0.5rem 1.5rem',
-      fontWeight: 'bold',
-      display: isMobile ? 'none' : 'block',
-      cursor: 'pointer'
-    },
-    alphabet: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      gap: isMobile ? '8px' : '12px',
-      marginBottom: '2rem'
-    },
-    letter: {
-      fontSize: isMobile ? '1.1rem' : '1.4rem',
-      fontWeight: '900',
-      color: '#5D4037',
-      cursor: 'pointer'
-    },
-    grid: {
-      display: 'grid',
-      gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))',
-      gap: '1.2rem',
-      marginBottom: '2rem'
-    },
-    card: {
-      backgroundColor: 'white',
-      borderRadius: '20px',
-      border: '1.5px solid #5D4037',
-      padding: '1.2rem',
-      position: 'relative',
-      overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
-    },
-    cardDecoration: (color) => ({
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '15px',
-      backgroundColor: color,
-    }),
+    // ... Tus estilos anteriores se mantienen igual ...
+    container: { width: '100%', maxWidth: '65rem', margin: '0 auto', padding: isMobile ? '1rem' : '2rem', minHeight: '100vh', boxSizing: 'border-box' },
+    headerTitle: { fontSize: isMobile ? '1.8rem' : '2.5rem', fontWeight: '900', color: '#5D4037', textAlign: 'center', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' },
+    searchBox: { position: 'relative', width: '100%', maxWidth: '50rem', margin: '0 auto 1.5rem auto' },
+    input: { width: '100%', padding: isMobile ? '0.8rem 1rem 0.8rem 3rem' : '1rem 7rem 1rem 3.5rem', borderRadius: '50px', border: '2px solid #5D4037', fontSize: '1rem', outline: 'none', boxSizing: 'border-box' },
+    btnBuscar: { position: 'absolute', right: '5px', top: '50%', transform: 'translateY(-50%)', backgroundColor: '#F4E6D4', border: '1.5px solid #5D4037', borderRadius: '25px', padding: '0.5rem 1.5rem', fontWeight: 'bold', display: isMobile ? 'none' : 'block', cursor: 'pointer' },
+    alphabet: { display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: isMobile ? '8px' : '12px', marginBottom: '2rem' },
+    letter: { fontSize: isMobile ? '1.1rem' : '1.4rem', fontWeight: '900', color: '#5D4037', cursor: 'pointer' },
+    grid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.2rem', marginBottom: '2rem' },
+    card: { backgroundColor: 'white', borderRadius: '20px', border: '1.5px solid #5D4037', padding: '1.2rem', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' },
+    cardDecoration: (color) => ({ position: 'absolute', top: 0, left: 0, width: '100%', height: '15px', backgroundColor: color }),
     waveSvg: { width: '100%', height: '100%', display: 'block' },
-    contentRow: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginTop: '10px'
-    },
+    contentRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' },
     runa: { fontSize: '1.6rem', fontWeight: '900', color: '#333', margin: 0 },
     esp: { fontSize: '1rem', color: '#555', marginLeft: '8px' },
     tipo: { fontSize: '0.85rem', color: '#777', fontWeight: 'bold', margin: '5px 0 0 0' },
     
-    // --- ESTILOS DE PAGINACIÓN IGUALES AL HISTORIAL ---
-    paginationContainer: {
+    // --- ESTILO NUEVO PARA EL BOTÓN DE COPIAR ---
+    copyBtn: {
+      color: '#8e8e8e', 
+      cursor: 'pointer', 
+      transition: 'all 0.2s ease',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: '0.9375rem',
-      marginTop: '1.25rem',
-      paddingBottom: '1.875rem'
+      padding: '5px',
+      borderRadius: '8px'
     },
-    pageButton: {
-      width: '2.1875rem',
-      height: '2.1875rem',
-      borderRadius: '50%',
-      border: 'none',
-      backgroundColor: 'white',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      cursor: 'pointer',
-      boxShadow: '0 0.125rem 0.3125rem rgba(0,0,0,0.1)',
-      color: '#5b4d49',
-      fontWeight: 'bold',
-      fontSize: '1.2rem',
-      transition: '0.3s'
-    },
-    pageInfo: {
-      fontSize: '1.125rem',
-      fontWeight: 'bold',
-      color: '#5b4d49',
-      letterSpacing: '0.125rem'
-    }
+
+    paginationContainer: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.9375rem', marginTop: '1.25rem', paddingBottom: '1.875rem' },
+    pageButton: { width: '2.1875rem', height: '2.1875rem', borderRadius: '50%', border: 'none', backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 0.125rem 0.3125rem rgba(0,0,0,0.1)', color: '#5b4d49', fontWeight: 'bold', fontSize: '1.2rem', transition: '0.3s' },
+    pageInfo: { fontSize: '1.125rem', fontWeight: 'bold', color: '#5b4d49', letterSpacing: '0.125rem' }
   };
 
   return (
@@ -211,13 +127,25 @@ const Diccionario = () => {
                 </div>
                 <p style={styles.tipo}>{p.tipo}</p>
               </div>
-              <Copy size={18} style={{ color: '#5D4037', cursor: 'pointer', opacity: 0.6 }} />
+              
+              {/* BOTÓN DE COPIAR MEJORADO */}
+              <div 
+                style={styles.copyBtn} 
+                onClick={() => handleCopy(p.id, p.runa)}
+                title="Copiar palabra"
+              >
+                {copiedId === p.id ? (
+                  <Check size={18} color="#4F7E53" />
+                ) : (
+                  <Copy size={18} />
+                )}
+              </div>
+
             </div>
           </div>
         ))}
       </div>
 
-      {/* CONTROLES DE PAGINACIÓN ACTUALIZADOS */}
       <div style={styles.paginationContainer}>
         <button 
           onClick={irAnterior} 

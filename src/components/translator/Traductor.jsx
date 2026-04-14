@@ -20,7 +20,7 @@ const Traductor = ({ onGoToLogin}) => {
   }, []);
   
   const handleSwapLanguages = () => {
-    setIsEspanolToRuna(!isEspanolToRuna); // Invierte el valor
+    setIsEspanolToRuna(!isEspanolToRuna); 
     
     // Intercambiamos el texto de origen con la traducción
     const tempText = text;
@@ -36,23 +36,21 @@ const Traductor = ({ onGoToLogin}) => {
     { esp: "Bienvenido", runa: "Alli shamushka", icon: "🏠" },
     { esp: "Adiós", runa: "Kaykama", icon: "👋" },
   ];
-
-  const styles = {
-    // --- CONTENEDOR PRINCIPAL BLINDADO ---
+const styles = {
     container: {
-      flex: 1,
-      width: '100%',
-      minHeight: '100vh',
-      overflowY: 'auto',
-      paddingTop: isMobile ? '2.5rem' : '2.5rem',
-      paddingRight: isMobile ? '0.9375rem' : '1.25rem',
-      paddingBottom: '1.25rem',
-      paddingLeft: isMobile ? '1rem' : '1.25rem', 
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      boxSizing: 'border-box',
-    },
+  flex: 1,
+  width: '100%',
+  minHeight: '100vh',
+  overflowY: 'auto',
+  paddingTop: '2.5rem',
+  paddingRight: isMobile ? '0.9375rem' : '1.25rem',
+  paddingBottom: '1.25rem',
+  paddingLeft: isMobile ? '1rem' : '1.25rem',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  boxSizing: 'border-box',
+},
     headerText: {
       textAlign: 'center',
       color: '#5d4037',
@@ -61,10 +59,7 @@ const Traductor = ({ onGoToLogin}) => {
       marginBottom: '1.5625rem',
       boxSizing: 'border-box',
       wordWrap: 'break-word',
-      overflowWrap: 'break-word', 
     },
-    
-    // --- ESTILOS DE LA TARJETA ---
     card: {
       backgroundColor: 'white', 
       width: '100%',
@@ -127,7 +122,7 @@ const Traductor = ({ onGoToLogin}) => {
       justifyContent: 'center',
       color: '#8d6e63',
       margin: isMobile ? '0.9375rem auto' : '0 auto', 
-      cursor: 'pointer', // Agregado para que se vea clickeable
+      cursor: 'pointer',
     },
     btnTranslate: {
       backgroundColor: '#3d8c56', 
@@ -143,8 +138,6 @@ const Traductor = ({ onGoToLogin}) => {
       cursor: 'pointer',
       margin: '1.5625rem auto 0'
     },
-
-    // --- ESTILOS EXCLUSIVOS PC (GRID) ---
     pcHeaderGrid: {
       display: 'grid',
       gridTemplateColumns: '1fr auto 1fr',
@@ -159,8 +152,6 @@ const Traductor = ({ onGoToLogin}) => {
       gap: '1.875rem',
       width: '100%'
     },
-    
-    
   };
 
   return (

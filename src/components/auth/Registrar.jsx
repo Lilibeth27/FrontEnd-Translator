@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react'; // Iconos profesionales
 import logo from '../../assets/logo.png';
 
 const Registrar = ({ onGoToLogin }) => {
@@ -7,6 +8,13 @@ const Registrar = ({ onGoToLogin }) => {
   const [contrasena, setContrasena] = useState('');
   const [confirmarContrasena, setConfirmarContrasena] = useState('');
   const [mostrarContrasena, setMostrarContrasena] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -26,109 +34,68 @@ const Registrar = ({ onGoToLogin }) => {
       fontFamily: "'Open Sans', sans-serif",
       justifyContent: 'center',
       alignItems: 'center',
-      margin: 0,
       padding: '1.25rem',
       boxSizing: 'border-box',
-      overflowX: 'hidden'
     },
     card: {
       width: '100%',
-      maxWidth: '37.5rem',
+      maxWidth: '450px',
       backgroundColor: '#FFF4DC',
       borderRadius: '1.6875rem',
-      position: 'relative',
       boxShadow: '0 0.5rem 1rem rgba(0,0,0,0.1)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      paddingBottom: '1.875rem'
+      paddingBottom: '1.875rem',
+      overflow: 'hidden'
     },
     waveHeader: {
       width: '100%',
-      position: 'relative',
-      overflow: 'hidden',
-      display: 'flex',
-      justifyContent: 'center',
-      borderTopLeftRadius: '1.6875rem',
-      borderTopRightRadius: '1.6875rem'
-    },
-    waveSvg: {
-      display: 'block',
-      width: '100%',
-      height: 'auto'
-    },
-    waveShape: {
-      fill: '#C4451C'
+      backgroundColor: '#C4451C',
+      lineHeight: 0
     },
     cardBody: {
       width: '100%',
-      padding: '0 1.25rem',
+      padding: '0 1.5rem',
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
     },
     logoWrapper: {
-      marginTop: '-4.375rem',
-      width: '60%',
-      maxWidth: '15rem',
-      height: '5.625rem',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom: '0.3125rem',
-      zIndex: 2
+      marginTop: '-2.5rem',
+      width: '100px',
+      height: '100px',
+      zIndex: 2,
+      backgroundColor: '#FFF4DC',
+      borderRadius: '50%',
+      padding: '5px'
     },
     title: {
-      fontSize: '1.875rem',
+      fontSize: '1.6rem',
       fontWeight: 'bold',
       color: '#5D4037',
-      margin: '0 0 0.625rem 0',
+      margin: '0.5rem 0',
       textAlign: 'center'
     },
     slogan: {
-      fontSize: '1.125rem',
-      fontWeight: '600',
+      fontSize: '1rem',
       color: '#5D4037',
-      margin: '0 0 0.9375rem 0',
-      textAlign: 'center'
-    },
-    form: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '0.75rem',
-      width: '100%',
-      boxSizing: 'border-box'
+      margin: '0 0 1.5rem 0',
+      textAlign: 'center',
+      lineHeight: '1.3'
     },
     inputGroup: {
       width: '100%',
-      maxWidth: '34.8125rem',
-      height: '2.5rem',
+      height: '3rem',
       backgroundColor: '#F9FAFB',
       borderRadius: '6.25rem',
-      border: '0.125rem solid #5D4037',
+      border: '2px solid #5D4037',
       display: 'flex',
       alignItems: 'center',
       padding: '0 1.25rem',
-      boxSizing: 'border-box'
-    },
-    iconWrapper: {
-      width: '1.25rem',
-      height: '1.25rem',
-      marginRight: '0.75rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    eyeIconWrapper: {
-      width: '1.5rem',
-      height: '1.5rem',
-      marginLeft: '0.75rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      cursor: 'pointer'
+      boxSizing: 'border-box',
+      marginBottom: '0.75rem'
     },
     input: {
       flex: 1,
@@ -137,43 +104,24 @@ const Registrar = ({ onGoToLogin }) => {
       outline: 'none',
       fontSize: '1rem',
       color: '#5D4037',
-      fontWeight: '600'
-    },
-    termsText: {
-      width: '100%',
-      maxWidth: '35.4375rem',
-      fontSize: '0.8125rem',
-      color: '#5D4037',
-      textAlign: 'left',
-      margin: '0.3125rem 0 0.9375rem 0',
-      paddingLeft: '0.625rem'
-    },
-    boldText: {
-      fontWeight: 'bold'
+      marginLeft: '0.75rem'
     },
     submitBtn: {
       width: '100%',
-      maxWidth: '34.0625rem',
-      height: '3.75rem',
+      height: '3.5rem',
       backgroundColor: '#C7856A',
       borderRadius: '1.6875rem',
       border: 'none',
-      fontSize: '1.375rem',
+      fontSize: '1.2rem',
       fontWeight: 'bold',
       color: '#FFFFFF',
       cursor: 'pointer',
-      marginBottom: '1.25rem'
+      marginTop: '0.5rem'
     },
     loginText: {
-      fontSize: '0.9375rem',
+      fontSize: '0.9rem',
       color: '#5D4037',
-      margin: 0,
-      textAlign: 'center'
-    },
-    loginLink: {
-      fontWeight: 'bold',
-      cursor: 'pointer',
-      color: '#000000'
+      marginTop: '1.5rem'
     }
   };
 
@@ -181,54 +129,80 @@ const Registrar = ({ onGoToLogin }) => {
     <div style={styles.canvas}>
       <div style={styles.card}>
         <div style={styles.waveHeader}>
-          <svg style={styles.waveSvg} viewBox="0 0 100 30" preserveAspectRatio="none">
-            <path style={styles.waveShape} d="M0,10 C15,0 35,20 50,10 C65,0 85,20 100,10 V0 H0 Z" />
-            <path style={styles.waveShape} d="M0,15 C10,10 20,20 30,15 C40,10 50,20 60,15 C70,10 80,20 90,15 C100,10 110,20 120,15 V0 H0 Z" opacity="0.6" />
+          <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{width: '100%', height: '70px'}}>
+            <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,0.00 L0.00,0.00 Z" style={{stroke: 'none', fill: '#C4451C'}}></path>
           </svg>
         </div>
+
         <div style={styles.cardBody}>
           <div style={styles.logoWrapper}>
-            <img src={logo} alt="Logo Traductor Runa Shimi" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src={logo} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
+
           <h1 style={styles.title}>Traductor Runa Shimi</h1>
           <p style={styles.slogan}>Crea una cuenta para conectarte<br/>con tus raíces ancestrales</p>
-          <form style={styles.form} onSubmit={handleRegister}>
+
+          <form style={{ width: '100%' }} onSubmit={handleRegister}>
+            {/* Usuario */}
             <div style={styles.inputGroup}>
-              <div style={styles.iconWrapper}>
-                <svg viewBox="0 0 448 512" fill="#5D4037" width="100%" height="100%"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"/></svg>
-              </div>
-              <input type="text" placeholder="Nombre de usuario" style={styles.input} value={usuario} onChange={(e) => setUsuario(e.target.value)} />
+              <User size={20} color="#5D4037" />
+              <input 
+                type="text" 
+                placeholder="Nombre de usuario" 
+                style={styles.input} 
+                value={usuario} 
+                onChange={(e) => setUsuario(e.target.value)} 
+              />
             </div>
+
+            {/* Correo */}
             <div style={styles.inputGroup}>
-              <div style={styles.iconWrapper}>
-                <svg viewBox="0 0 512 512" fill="#5D4037" width="100%" height="100%"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
-              </div>
-              <input type="email" placeholder="Correo electrónico" style={styles.input} value={correo} onChange={(e) => setCorreo(e.target.value)} />
+              <Mail size={20} color="#5D4037" />
+              <input 
+                type="email" 
+                placeholder="Correo electrónico" 
+                style={styles.input} 
+                value={correo} 
+                onChange={(e) => setCorreo(e.target.value)} 
+              />
             </div>
+
+            {/* Contraseña */}
             <div style={styles.inputGroup}>
-              <div style={styles.iconWrapper}>
-                <svg viewBox="0 0 448 512" fill="#5D4037" width="100%" height="100%"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"/></svg>
-              </div>
-              <input type={mostrarContrasena ? "text" : "password"} placeholder="Contraseña" style={styles.input} value={contrasena} onChange={(e) => setContrasena(e.target.value)} />
-              <div style={styles.eyeIconWrapper} onClick={() => setMostrarContrasena(!mostrarContrasena)}>
-                {mostrarContrasena ? (
-                  <svg viewBox="0 0 640 512" fill="#5D4037" width="100%" height="100%"><path d="M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346.39 397.39a144.13 144.13 0 0 1 -26.39 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0 -147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0 -2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0 -121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1 -1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z"/></svg>
-                ) : (
-                  <svg viewBox="0 0 576 512" fill="#5D4037" width="100%" height="100%"><path d="M288 144a110.94 110.94 0 0 0 -31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1 -56 56 55.4 55.4 0 0 1 -27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"/></svg>
-                )}
+              <Lock size={20} color="#5D4037" />
+              <input 
+                type={mostrarContrasena ? "text" : "password"} 
+                placeholder="Contraseña" 
+                style={styles.input} 
+                value={contrasena} 
+                onChange={(e) => setContrasena(e.target.value)} 
+              />
+              <div onClick={() => setMostrarContrasena(!mostrarContrasena)} style={{ cursor: 'pointer', display: 'flex' }}>
+                {mostrarContrasena ? <EyeOff size={20} color="#5D4037" /> : <Eye size={20} color="#5D4037" />}
               </div>
             </div>
+
+            {/* Confirmar Contraseña */}
             <div style={styles.inputGroup}>
-              <div style={styles.iconWrapper}>
-                <svg viewBox="0 0 448 512" fill="#5D4037" width="100%" height="100%"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"/></svg>
-              </div>
-              <input type="password" placeholder="Confirmar contraseña" style={styles.input} value={confirmarContrasena} onChange={(e) => setConfirmarContrasena(e.target.value)} />
+              <Lock size={20} color="#5D4037" />
+              <input 
+                type="password" 
+                placeholder="Confirmar contraseña" 
+                style={styles.input} 
+                value={confirmarContrasena} 
+                onChange={(e) => setConfirmarContrasena(e.target.value)} 
+              />
             </div>
-            <p style={styles.termsText}>Al registrarte, aceptas nuestros <span style={styles.boldText}>Términos y Condiciones</span> y <span style={styles.boldText}>Politicas de Privacidad.</span></p>
-            <button type="submit" style={styles.submitBtn}onClick={onGoToLogin}>Crear Cuenta</button>
+
+            <p style={{ fontSize: '0.75rem', color: '#5D4037', margin: '10px 0' }}>
+              Al registrarte, aceptas nuestros <b>Términos y Condiciones</b> y <b>Políticas de Privacidad.</b>
+            </p>
+
+            <button type="submit" style={styles.submitBtn}>Crear Cuenta</button>
           </form>
+
           <p style={styles.loginText}>
-            ¿Ya tienes una cuenta? <span style={styles.loginLink} onClick={onGoToLogin}>Inicia sesión</span>
+            ¿Ya tienes una cuenta? <span style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={onGoToLogin}>Inicia sesión</span>
           </p>
         </div>
       </div>

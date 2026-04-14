@@ -49,7 +49,7 @@ const Diccionario = () => {
       maxWidth: '65rem',
       margin: '0 auto',
       padding: isMobile ? '1rem' : '2rem',
-      backgroundColor: '#F4E6D4',
+      
       minHeight: '100vh',
       boxSizing: 'border-box'
     },

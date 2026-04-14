@@ -36,6 +36,8 @@ const Historial = () => {
       width: '100%',
       maxWidth: '50rem',
       marginTop: '1.875rem',
+      marginRight: 'auto',
+      marginLeft: 'auto',
     },
     header: {
       fontSize: '2rem',

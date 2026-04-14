@@ -3,6 +3,7 @@ import { ArrowLeftRight, RefreshCw, Copy } from 'lucide-react';
 import Historial from './Historial';
 import Diccionario from './Diccionario';
 import Acerca from './Acerca'
+import FrasesComunes from './FrasesComunes';
 
 const Traductor = ({ onGoToLogin}) => {
   const [text, setText] = useState('');
@@ -159,93 +160,14 @@ const Traductor = ({ onGoToLogin}) => {
       width: '100%'
     },
     
-    // --- ESTILOS PARA FRASES COMUNES ---
-    header: {
-      fontSize: "2rem",
-      fontWeight: "900",
-      color: "#5a3d2b",
-      marginBottom: "1.875rem",
-      display: "flex",
-      alignItems: "center",
-      gap: "0.625rem",
-      textAlign: "center",
-    },
-
-    grid: {
-      display: "grid",
-      gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)",
-      gap: "1.25rem",
-      width: "100%",
-      maxWidth: "50rem",
-      padding: isMobile ? '0 0.5rem' : '0', 
-      boxSizing: 'border-box',
-    },
-
-    frasescard: {
-      backgroundColor: "white",
-      width: "100%",
-      maxWidth: isMobile ?  "calc(100% - 2rem)" : "53.124rem",
-      borderRadius: "1.875rem",
-      padding: "0.9375rem 1.5625rem",
-      display: "flex",
-      alignItems: "center",
-      gap: "0.9375rem",
-      boxShadow: "0 0.125rem 0.375rem rgba(0,0,0,0.05)",
-    },
-
-    icon: {
-      fontSize: "1.875rem",
-    },
-
-    textContainer: {
-      display: "flex",
-      flexDirection: "column",
-    },
-
-    espText: {
-      fontSize: "0.8125rem",
-      color: "#7a7a7a",
-    },
-
-    runaText: {
-      fontSize: "1.25rem",
-      fontWeight: "bold",
-      color: "#2d5a42",
-      margin: 0,
-    },
     
-    // --- HISTORIAL DE TRADUCCIONES ---
-    textareaWrapperHistorial: {
-      width: '80%',
-      display: 'flex',
-      boxSizing: 'border-box'
-    },
-    textareahistorial: {
-      width: '80%',
-      border: '0.0625rem solid #ddd',
-      borderRadius: '1.6875rem',
-      minHeight: isMobile ? '7.5rem' : '11.25rem',
-      resize: 'none',
-      fontSize: '1rem',
-      boxSizing: 'border-box', 
-      fontFamily: 'inherit',
-      backgroundColor: 'white'
-    },
-    waveSvg: {
-      display: 'block',
-      width: '100%',
-      height: 'auto'
-    },
-    waveShape: {
-      fill: '#C4451C'
-    },
   };
 
   return (
     <div style={styles.container}>
       
       {/* TEXTO DEL ENCABEZADO */}
-      <div style={styles.headerText}>
+      <div id="traductor" style={styles.headerText}>
         <h1> Traductor De Runa Shimi 🌿</h1>
         <p>
           Conecta con las raíces ancestrales a través de la lengua Runa Shimi.
@@ -359,26 +281,9 @@ const Traductor = ({ onGoToLogin}) => {
 
       </div>
 
-      {/* FRASES COMUNES */}
-      <div>
-        <h1 style={styles.header}>
-          Frases Comunes <span>⛰️</span>
-        </h1>
+{/* Frases Comunes */}
+      <FrasesComunes />
 
-        <div style={styles.grid}>
-          {frases.map((item, index) => (
-            <div key={index} style={styles.frasescard}>
-              <div style={styles.icon}>{item.icon}</div>
-
-              <div style={styles.textContainer}>
-                <span style={styles.espText}>{item.esp}</span>
-                <h2 style={styles.runaText}>{item.runa}</h2>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      
       {/* HISTORIAL DE TRADUCCIONES */}
       <Historial historial={historial} />
       
@@ -388,7 +293,7 @@ const Traductor = ({ onGoToLogin}) => {
       </div>
       
       {/* Acerca */}
-     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
         <Acerca />
       </div>
       

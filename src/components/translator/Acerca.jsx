@@ -1,3 +1,4 @@
+import { clear } from '@testing-library/user-event/dist/clear';
 import React, { useState, useEffect } from 'react';
 
 const Acerca = () => {
@@ -12,19 +13,23 @@ const Acerca = () => {
   const styles = {
     container: {
       width: '100%',
-      maxWidth: '53.125rem', // Mismo ancho máximo que tu tarjeta principal
-      margin: '2.5rem auto 0',
+      maxWidth: '53.125rem', 
+      margin: '5rem auto 3rem',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       boxSizing: 'border-box',
+      position: 'relative',
+      clear: 'both',
     },
     headerContainer: {
       display: 'flex',
       alignItems: 'center',
       gap: '0.625rem',
-      marginBottom: '1.875rem',
+      marginBottom: '2.5rem',
       textAlign: 'center',
+      with: '100%',
+         justifyContent: 'center',
     },
     headerText: {
       fontSize: '2rem',

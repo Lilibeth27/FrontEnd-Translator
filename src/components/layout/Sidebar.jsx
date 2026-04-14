@@ -36,7 +36,7 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       width: '100%',
       height: '100%',
       zIndex: 1000,
-      pointerEvents: isOpen ? 'auto' : 'none',
+      pointerEvents: 'none',
       overflow: 'hidden',
     },
     sidebar: {
@@ -52,6 +52,7 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       transition: 'transform 0.3s ease',
       overflowY: 'auto',
       boxShadow: isOpen ? '4px 0 10px rgba(0,0,0,0.1)' : 'none',
+      pointerEvents: 'auto'
     },
     sidebarOpen: {
       width: isMobile ? '85vw' : '15.625rem',
@@ -177,7 +178,8 @@ const Sidebar = ({ isOpen, onToggle, onLogout }) => {
       width: '100%',
       height: '100%',
       backgroundColor: 'rgba(0,0,0,0.5)',
-      zIndex: 1000
+      zIndex: 1000,
+      pointerEvents: 'auto'
     }
   };
 

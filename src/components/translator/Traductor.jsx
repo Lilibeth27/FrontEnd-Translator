@@ -4,10 +4,11 @@ import Historial from './Historial';
 import Diccionario from './Diccionario';
 import Acerca from './Acerca'
 
-
 const Traductor = ({ onGoToLogin}) => {
   const [text, setText] = useState('');
+  const [translatedText, setTranslatedText] = useState(''); // Guarda la traducción
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [isEspanolToRuna, setIsEspanolToRuna] = useState(true); // Controla el idioma
   const [historial, setHistorial] = useState([]);
   const [diccionario, setDiccionario] = useState([]);
 
@@ -17,16 +18,25 @@ const Traductor = ({ onGoToLogin}) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   
-const frases = [
-  { esp: "Buenos Días", runa: "Alli puncha", icon: "🌞" },
-  { esp: "Gracias", runa: "Yupaychani", icon: "🙏" },
-  { esp: "Hola", runa: "Imanalla", icon: "👋" },
-  { esp: "Te quiero", runa: "Kanta kuyani", icon: "❤️" },
-  { esp: "Bienvenido", runa: "Alli shamushka", icon: "🏠" },
-  { esp: "Adiós", runa: "Kaykama", icon: "👋" },
-];
+  const handleSwapLanguages = () => {
+    setIsEspanolToRuna(!isEspanolToRuna); // Invierte el valor
+    
+    // Intercambiamos el texto de origen con la traducción
+    const tempText = text;
+    setText(translatedText);
+    setTranslatedText(tempText);
+  };
 
-const styles = {
+  const frases = [
+    { esp: "Buenos Días", runa: "Alli puncha", icon: "🌞" },
+    { esp: "Gracias", runa: "Yupaychani", icon: "🙏" },
+    { esp: "Hola", runa: "Imanalla", icon: "👋" },
+    { esp: "Te quiero", runa: "Kanta kuyani", icon: "❤️" },
+    { esp: "Bienvenido", runa: "Alli shamushka", icon: "🏠" },
+    { esp: "Adiós", runa: "Kaykama", icon: "👋" },
+  ];
+
+  const styles = {
     // --- CONTENEDOR PRINCIPAL BLINDADO ---
     container: {
       flex: 1,
@@ -116,6 +126,7 @@ const styles = {
       justifyContent: 'center',
       color: '#8d6e63',
       margin: isMobile ? '0.9375rem auto' : '0 auto', 
+      cursor: 'pointer', // Agregado para que se vea clickeable
     },
     btnTranslate: {
       backgroundColor: '#3d8c56', 
@@ -147,9 +158,8 @@ const styles = {
       gap: '1.875rem',
       width: '100%'
     },
-    ///  estilos para frases comunes 
-   
-
+    
+    // --- ESTILOS PARA FRASES COMUNES ---
     header: {
       fontSize: "2rem",
       fontWeight: "900",
@@ -203,14 +213,14 @@ const styles = {
       color: "#2d5a42",
       margin: 0,
     },
-    //HISTORIAL DE TRADUCCIONES 
-     textareaWrapperHistorial: {
+    
+    // --- HISTORIAL DE TRADUCCIONES ---
+    textareaWrapperHistorial: {
       width: '80%',
       display: 'flex',
-   
       boxSizing: 'border-box'
-  },
-  textareahistorial: {
+    },
+    textareahistorial: {
       width: '80%',
       border: '0.0625rem solid #ddd',
       borderRadius: '1.6875rem',
@@ -221,7 +231,7 @@ const styles = {
       fontFamily: 'inherit',
       backgroundColor: 'white'
     },
-waveSvg: {
+    waveSvg: {
       display: 'block',
       width: '100%',
       height: 'auto'
@@ -229,79 +239,35 @@ waveSvg: {
     waveShape: {
       fill: '#C4451C'
     },
-};
-return (
-  
-  <div style={styles.container}>
-    
-    {/* TEXTO DEL ENCABEZADO */}
-    <div style={styles.headerText}>
-      <h1> Traductor De Runa Shimi 🌿
-      </h1>
-      <p>
-        Conecta con las raíces ancestrales a través de la lengua Runa Shimi.
-      </p>
-    </div>
+  };
 
-    {/* TARJETA */}
-    <div style={styles.card}>
+  return (
+    <div style={styles.container}>
       
-      {isMobile ? (
-        <>
-          <div style={styles.textareaWrapper}>
-            <div style={{alignSelf: 'flex-start'}}>
-              <div style={styles.langLabel}>ESPAÑOL</div>
-            </div>
+      {/* TEXTO DEL ENCABEZADO */}
+      <div style={styles.headerText}>
+        <h1> Traductor De Runa Shimi 🌿</h1>
+        <p>
+          Conecta con las raíces ancestrales a través de la lengua Runa Shimi.
+        </p>
+      </div>
 
-            <textarea 
-              style={styles.textarea}
-              placeholder="Escribe aquí en español..."
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              maxLength={300}
-            />
-
-            <div style={styles.footerRow}>
-              <span>{text.length}/300</span>
-            </div>
-          </div>
-
-          <div style={styles.swapCircle}>
-            <ArrowLeftRight size={20} />
-          </div>
-
-          <div style={styles.textareaWrapper}>
-            <div style={{alignSelf: 'flex-start'}}>
-              <div style={styles.langLabel}>RUNA SHIMI</div>
-            </div>
-
-            <textarea 
-              style={styles.textarea}
-              placeholder="La traducción aparecerá aquí..."
-              readOnly
-            />
-
-            <div style={styles.footerRow}>
-              <span></span> 
-              <Copy size={18} style={{cursor: 'pointer'}} />
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div style={styles.pcHeaderGrid}>
-            <div style={styles.langLabel}>ESPAÑOL</div>
-            <div style={styles.swapCircle}>
-              <ArrowLeftRight size={20} />
-            </div>
-            <div style={styles.langLabel}>RUNA SHIMI</div>
-          </div>
-
-          <div style={styles.pcInputsGrid}>
+      {/* TARJETA */}
+      <div style={styles.card}>
+        
+        {isMobile ? (
+          <>
+            {/* Cuadro de Origen (Móvil) */}
             <div style={styles.textareaWrapper}>
+              <div style={{alignSelf: 'flex-start'}}>
+                <div style={styles.langLabel}>
+                  {isEspanolToRuna ? 'ESPAÑOL' : 'RUNA SHIMI'}
+                </div>
+              </div>
+
               <textarea 
                 style={styles.textarea}
-                placeholder="Escribe aquí en español..."
+                placeholder={isEspanolToRuna ? "Escribe aquí en español..." : "Escribe aquí en runa shimi..."}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 maxLength={300}
@@ -312,56 +278,122 @@ return (
               </div>
             </div>
 
+            {/* Botón de Intercambio (Móvil) */}
+            <div style={styles.swapCircle} onClick={handleSwapLanguages}>
+              <ArrowLeftRight size={20} />
+            </div>
+
+            {/* Cuadro de Destino (Móvil) */}
             <div style={styles.textareaWrapper}>
+              <div style={{alignSelf: 'flex-start'}}>
+                <div style={styles.langLabel}>
+                  {isEspanolToRuna ? 'RUNA SHIMI' : 'ESPAÑOL'}
+                </div>
+              </div>
+
               <textarea 
                 style={styles.textarea}
                 placeholder="La traducción aparecerá aquí..."
+                value={translatedText}
                 readOnly
               />
 
               <div style={styles.footerRow}>
-                <span></span>
-                <Copy size={20} style={{cursor: 'pointer'}} />
+                <span></span> 
+                <Copy size={18} style={{cursor: 'pointer'}} />
               </div>
             </div>
-          </div>
-        </>
-      )}
-
-      <button style={styles.btnTranslate}>
-        Traducir <RefreshCw size={20} />
-      </button>
-
-    </div>
-
-    {/*  FRASES COMUNES */}
-    <div>
-      <h1 style={styles.header}>
-        Frases Comunes <span>⛰️</span>
-      </h1>
-
-      <div style={styles.grid}>
-        {frases.map((item, index) => (
-          <div key={index} style={styles.frasescard}>
-            <div style={styles.icon}>{item.icon}</div>
-
-            <div style={styles.textContainer}>
-              <span style={styles.espText}>{item.esp}</span>
-              <h2 style={styles.runaText}>{item.runa}</h2>
+          </>
+        ) : (
+          <>
+            {/* Encabezados y Botón de Intercambio (PC) */}
+            <div style={styles.pcHeaderGrid}>
+              <div style={styles.langLabel}>
+                {isEspanolToRuna ? 'ESPAÑOL' : 'RUNA SHIMI'}
+              </div>
+              <div style={styles.swapCircle} onClick={handleSwapLanguages}>
+                <ArrowLeftRight size={20} />
+              </div>
+              <div style={styles.langLabel}>
+                {isEspanolToRuna ? 'RUNA SHIMI' : 'ESPAÑOL'}
+              </div>
             </div>
-          </div>
-        ))}
+
+            <div style={styles.pcInputsGrid}>
+              {/* Cuadro de Origen (PC) */}
+              <div style={styles.textareaWrapper}>
+                <textarea 
+                  style={styles.textarea}
+                  placeholder={isEspanolToRuna ? "Escribe aquí en español..." : "Escribe aquí en runa shimi..."}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  maxLength={300}
+                />
+
+                <div style={styles.footerRow}>
+                  <span>{text.length}/300</span>
+                </div>
+              </div>
+
+              {/* Cuadro de Destino (PC) */}
+              <div style={styles.textareaWrapper}>
+                <textarea 
+                  style={styles.textarea}
+                  placeholder="La traducción aparecerá aquí..."
+                  value={translatedText}
+                  readOnly
+                />
+
+                <div style={styles.footerRow}>
+                  <span></span>
+                  <Copy size={20} style={{cursor: 'pointer'}} />
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        <button style={styles.btnTranslate}>
+          Traducir <RefreshCw size={20} />
+        </button>
+
       </div>
-    </div>
-    {/* HISTORIAL DE TRADUCCIONES */}
-    
+
+      {/* FRASES COMUNES */}
+      <div>
+        <h1 style={styles.header}>
+          Frases Comunes <span>⛰️</span>
+        </h1>
+
+        <div style={styles.grid}>
+          {frases.map((item, index) => (
+            <div key={index} style={styles.frasescard}>
+              <div style={styles.icon}>{item.icon}</div>
+
+              <div style={styles.textContainer}>
+                <span style={styles.espText}>{item.esp}</span>
+                <h2 style={styles.runaText}>{item.runa}</h2>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {/* HISTORIAL DE TRADUCCIONES */}
       <Historial historial={historial} />
-    {/* Diccionario */}
-     <Diccionario />
-     {/* Acerca */}
-      <Acerca />
-  </div>
-  
-);
+      
+      {/* Diccionario */}
+      <div style={{ width: '100%', marginBottom: '5rem', display: 'flex', flexDirection: 'column' }}>
+        <Diccionario />
+      </div>
+      
+      {/* Acerca */}
+     <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Acerca />
+      </div>
+      
+    </div>
+  );
 }
+
 export default Traductor;

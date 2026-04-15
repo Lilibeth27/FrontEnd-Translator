@@ -72,42 +72,61 @@ La aplicación utiliza un estado centralizado para gestionar la navegación entr
 
 ## Estructura del Proyecto
 
-```text
+```
 src/
 ├── components/
 │   ├── auth/
 │   │   ├── Login.jsx          # Componente de inicio de sesión
 │   │   └── Registrar.jsx      # Componente de registro
+│   │
 │   ├── layout/
 │   │   └── Sidebar.jsx        # Barra de navegación lateral
+│   │
 │   └── translator/
 │       ├── Traductor.jsx      # Interfaz principal de traducción
 │       ├── Diccionario.jsx    # Diccionario de términos
 │       ├── Historial.jsx      # Historial de traducciones
 │       ├── FrasesComunes.jsx  # Frases comunes
 │       └── Acerca.jsx         # Información sobre el proyecto
+│
 ├── pages/
 │   ├── AuthPage.jsx           # Página de autenticación
 │   └── TranslatorPage.jsx     # Página principal del traductor
+│
 ├── assets/                    # Recursos estáticos
+│
 └── App.jsx                    # Componente raíz
+```
+
+---
+
 ## Scripts Disponibles
 
-- start: react-scripts start (Inicia servidor de desarrollo)
-- build: react-scripts build (Construye versión de producción)
-- test: react-scripts test (Ejecuta pruebas)
-- eject: react-scripts eject (Expone configuración de build)
+* start: `react-scripts start`
+  Inicia el servidor de desarrollo.
+
+* build: `react-scripts build`
+  Construye la versión de producción.
+
+* test: `react-scripts test`
+  Ejecuta las pruebas.
+
+* eject: `react-scripts eject`
+  Expone la configuración de build.
+
+---
 
 ## Arquitectura
 
-El proyecto utiliza una arquitectura SPA (Single Page Application) basada en React con:
+El proyecto utiliza una arquitectura SPA (Single Page Application) basada en React:
 
-- Estado gestionado localmente con hooks de React.
-- Enrutamiento del lado del cliente con React Router DOM.
-- Estilos responsive con Tailwind CSS y PostCSS.
-- Build optimizado con Create React App.
+* Estado gestionado localmente con hooks de React.
+* Enrutamiento del lado del cliente con React Router DOM.
+* Estilos responsive con Tailwind CSS y PostCSS.
+* Build optimizado con Create React App.
+
+---
 
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT.
-```

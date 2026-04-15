@@ -72,25 +72,25 @@ La aplicación utiliza un estado centralizado para gestionar la navegación entr
 
 ## Estructura del Proyecto
 
+```text
 src/
 ├── components/
-│ ├── auth/
-│ │ ├── Login.jsx # Componente de inicio de sesión
-│ │ └── Registrar.jsx # Componente de registro
-│ ├── layout/
-│ │ └── Sidebar.jsx # Barra de navegación lateral
-│ └── translator/
-│ ├── Traductor.jsx # Interfaz principal de traducción
-│ ├── Diccionario.jsx # Diccionario de términos
-│ ├── Historial.jsx # Historial de traducciones
-│ ├── FrasesComunes.jsx # Frases comunes
-│ └── Acerca.jsx # Información sobre el proyecto
+│   ├── auth/
+│   │   ├── Login.jsx          # Componente de inicio de sesión
+│   │   └── Registrar.jsx      # Componente de registro
+│   ├── layout/
+│   │   └── Sidebar.jsx        # Barra de navegación lateral
+│   └── translator/
+│       ├── Traductor.jsx      # Interfaz principal de traducción
+│       ├── Diccionario.jsx    # Diccionario de términos
+│       ├── Historial.jsx      # Historial de traducciones
+│       ├── FrasesComunes.jsx  # Frases comunes
+│       └── Acerca.jsx         # Información sobre el proyecto
 ├── pages/
-│ ├── AuthPage.jsx # Página de autenticación
-│ └── TranslatorPage.jsx # Página principal del traductor
-├── App.jsx # Componente raíz
-└── assets/ # Recursos estáticos
-
+│   ├── AuthPage.jsx           # Página de autenticación
+│   └── TranslatorPage.jsx     # Página principal del traductor
+├── assets/                    # Recursos estáticos
+└── App.jsx                    # Componente raíz
 ## Scripts Disponibles
 
 - start: react-scripts start (Inicia servidor de desarrollo)
@@ -110,3 +110,4 @@ El proyecto utiliza una arquitectura SPA (Single Page Application) basada en Rea
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT.
+```

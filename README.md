@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Traductor Runa Shimi
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Una aplicación web de traducción bidireccional entre español y Runa Shimi (Quichua) diseñada para la preservación cultural y lingüística.
 
-## Available Scripts
+## Caracteristicas Principales
 
-In the project directory, you can run:
+- Traducción Bidireccional: Interfaz dedicada para conversión entre español y Runa Shimi con capacidad de intercambio de idiomas.
+- Diccionario Cultural: Base de datos categorizada y buscable de términos quichua.
+- Historial de Traducciones: Seguimiento de traducciones anteriores con paginación.
+- Gestión de Sesión: Sistema de autenticación con login, registro y recuperación.
+- Diseño Responsivo: Enfoque mobile-first con layouts adaptativos.
 
-### `npm start`
+## Stack Tecnologico
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Tecnologia       | Versión | Propósito                                        |
+| ---------------- | ------- | ------------------------------------------------ |
+| React            | 19.2.4  | Biblioteca principal para la interfaz de usuario |
+| React DOM        | 19.2.4  | Renderizado del DOM virtual                      |
+| React Router DOM | 7.14.0  | Gestión de rutas y navegación                    |
+| Tailwind CSS     | 3.4.0   | Framework de estilos utilitario                  |
+| Lucide React     | 1.8.0   | Biblioteca de iconos                             |
+| React Scripts    | 5.0.1   | Build tool y configuración del proyecto          |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Herramientas de Desarrollo
 
-### `npm test`
+| Herramienta  | Versión | Uso                         |
+| ------------ | ------- | --------------------------- |
+| PostCSS      | 8.5.8   | Procesamiento de CSS        |
+| Autoprefixer | 10.4.27 | Prefijos automáticos de CSS |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Testing
 
-### `npm run build`
+| Herramienta                | Versión | Propósito                         |
+| -------------------------- | ------- | --------------------------------- |
+| Testing Library DOM        | 10.4.1  | Utilidades para testing del DOM   |
+| Testing Library Jest DOM   | 6.9.1   | Matchers personalizados para Jest |
+| Testing Library React      | 16.3.2  | Testing de componentes React      |
+| Testing Library User Event | 13.5.0  | Simulación de eventos de usuario  |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Instalación
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clona el repositorio:
+   git clone <repository-url>
+   cd traductor
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Instala dependencias:
+   npm install
 
-### `npm run eject`
+3. Inicia el servidor de desarrollo:
+   npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Abre http://localhost:3000 en tu navegador.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Uso
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Autenticación
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Para acceder a la aplicación, utiliza las siguientes credenciales:
 
-## Learn More
+- Usuario: admin
+- Contraseña: 1234
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Navegación
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+La aplicación utiliza un estado centralizado para gestionar la navegación entre vistas:
 
-### Code Splitting
+- Traductor: Interfaz principal de traducción bidireccional
+- Frases Comunes: Colección de expresiones frecuentes
+- Diccionario: Consulta de términos quichua
+- Historial: Registro de traducciones anteriores
+- Acerca: Información cultural del proyecto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Estructura del Proyecto
 
-### Analyzing the Bundle Size
+src/
+├── components/
+│ ├── auth/
+│ │ ├── Login.jsx # Componente de inicio de sesión
+│ │ └── Registrar.jsx # Componente de registro
+│ ├── layout/
+│ │ └── Sidebar.jsx # Barra de navegación lateral
+│ └── translator/
+│ ├── Traductor.jsx # Interfaz principal de traducción
+│ ├── Diccionario.jsx # Diccionario de términos
+│ ├── Historial.jsx # Historial de traducciones
+│ ├── FrasesComunes.jsx # Frases comunes
+│ └── Acerca.jsx # Información sobre el proyecto
+├── pages/
+│ ├── AuthPage.jsx # Página de autenticación
+│ └── TranslatorPage.jsx # Página principal del traductor
+├── App.jsx # Componente raíz
+└── assets/ # Recursos estáticos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Scripts Disponibles
 
-### Making a Progressive Web App
+- start: react-scripts start (Inicia servidor de desarrollo)
+- build: react-scripts build (Construye versión de producción)
+- test: react-scripts test (Ejecuta pruebas)
+- eject: react-scripts eject (Expone configuración de build)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Arquitectura
 
-### Advanced Configuration
+El proyecto utiliza una arquitectura SPA (Single Page Application) basada en React con:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Estado gestionado localmente con hooks de React.
+- Enrutamiento del lado del cliente con React Router DOM.
+- Estilos responsive con Tailwind CSS y PostCSS.
+- Build optimizado con Create React App.
 
-### Deployment
+## Licencia
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este proyecto está bajo la Licencia MIT.

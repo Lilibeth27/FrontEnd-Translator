@@ -1,16 +1,22 @@
-import { clear } from '@testing-library/user-event/dist/clear';
+// importamos react y los hooks 
 import React, { useState, useEffect } from 'react';
 
+// Componente Acerca del Runa Shimi
 const Acerca = () => {
+  // Estado para detectar si es móvil o no
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
+  // Detecta cambios en el tamaño de la pantalla para actualizar el estado de isMobile
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    //Agregamos el event listener para detectar cambios en el tamaño de la pantalla
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  //Estilos 
   const styles = {
+    //Contenedor principal 
     container: {
       width: '100%',
       maxWidth: '53.125rem', 
@@ -22,6 +28,7 @@ const Acerca = () => {
       position: 'relative',
       clear: 'both',
     },
+    // Titulo y Icono 
     headerContainer: {
       display: 'flex',
       alignItems: 'center',
@@ -29,14 +36,15 @@ const Acerca = () => {
       marginBottom: '2.5rem',
       textAlign: 'center',
       with: '100%',
-         justifyContent: 'center',
+      justifyContent: 'center',
     },
+    // Estilo del titulo 
     headerText: {
       fontSize: '2rem',
-      fontWeight: '900',
-      color: '#5a3d2b', 
+        color: '#5d4037',
       margin: 0,
     },
+    // Circulo del icono del titulo
     iconCircle: {
       backgroundColor: '#f4e6d4',
       borderRadius: '50%',
@@ -46,14 +54,17 @@ const Acerca = () => {
       justifyContent: 'center',
       fontSize: '1.25rem',
     },
+    //grid de tarjetas 
     grid: {
       display: 'grid',
+      //cambia a una sola columna en movil
       gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-      gap: '1.25rem',
+      gap: '1rem',
       width: '100%',
       padding: isMobile ? '0 0.5rem' : '0',
       boxSizing: 'border-box',
     },
+// Estilo de cada tarjeta
     card: {
       backgroundColor: 'white',
       borderRadius: '1.875rem', 
@@ -66,17 +77,20 @@ const Acerca = () => {
       paddingBottom: '1.5625rem',
       border: '0.0625rem solid #f4e6d4',
     },
+    // Contenedor del blob SVG y el icono
     blobContainer: {
       width: '100%',
       height: '6.25rem',
       position: 'relative',
       overflow: 'visible',
     },
+    //Estilo del SVG
     blobSvg: {
       width: '100%',
       height: '100%',
       display: 'block',
     },
+    // Estilo del icono que flota
     iconBadge: {
       position: 'absolute',
       bottom: '-1.25rem',
@@ -92,12 +106,14 @@ const Acerca = () => {
       fontSize: '1.25rem',
       zIndex: 10,
     },
+    //titulo de cada tarjeta
     cardTitle: {
       fontSize: '1.25rem',
       fontWeight: 'bold',
       marginTop: '2.1875rem',
       marginBottom: '0.625rem',
     },
+    //texto de cada tarjeta
     cardText: {
       textAlign: 'center',
       padding: '0 1.25rem',
@@ -106,6 +122,7 @@ const Acerca = () => {
       lineHeight: '1.6',
       fontWeight: '500',
     },
+    //linea de pie de pagina 
     footerLine: {
       marginTop: '3.125rem',
       borderTop: '0.125rem solid #d7c9b8',
@@ -117,11 +134,13 @@ const Acerca = () => {
       alignItems: 'center',
       gap: '0.625rem',
     },
+    //texto del pie de pagina
     footerText: {
       color: '#5a3d2b',
       fontSize: '0.875rem',
       fontWeight: 'bold',
     },
+    //texto de advertencia final
     disclaimer: {
       marginTop: '0.9375rem',
       fontSize: '0.75rem',
@@ -130,7 +149,7 @@ const Acerca = () => {
       fontWeight: 'bold',
     }
   };
-
+ // Información de las tarjetas (contenido dinámico)
   const cardsInfo = [
     {
       title: 'Origen',
@@ -138,6 +157,8 @@ const Acerca = () => {
       text: 'El Runa Shimi es hablado por millones de personas en Ecuador, Perú, Bolivia y Colombia. Es la lengua del pueblo Inca y sus descendientes. 🦙',
       icon: '⛰️',
       
+
+      // SVG decorativo
       svg: (
         <svg viewBox="0 0 100 45" preserveAspectRatio="none" style={styles.blobSvg}>
           <path d="M0,0 L100,0 L100,20 C85,35 75,5 50,25 C25,45 15,10 0,20 Z" fill="#c64c24"/>
@@ -174,6 +195,7 @@ const Acerca = () => {
     }
   ];
 
+  //Renderizamos
   return (
     <div style={styles.container}>
       {/* Título Principal */}
@@ -182,22 +204,26 @@ const Acerca = () => {
         <div style={styles.iconCircle}>🌱</div>
       </div>
 
-      {/* Grid de Tarjetas */}
+      {/*  Tarjetas */}
       <div style={styles.grid}>
         {cardsInfo.map((card, index) => (
           <div key={index} style={styles.card}>
             
+             {/* Parte superior decorativa */}
             <div style={styles.blobContainer}>
               {card.svg}
+              {/* Icono flotante */}
               <div style={styles.iconBadge}>
                 {card.icon}
               </div>
             </div>
             
+            {/* Título de la tarjeta */}
             <h3 style={{ ...styles.cardTitle, color: card.color }}>
               {card.title}
             </h3>
             
+             {/* Texto de la tarjeta */}
             <p style={styles.cardText}>
               {card.text}
             </p>
@@ -205,12 +231,13 @@ const Acerca = () => {
         ))}
       </div>
 
-      {/* Footer del componente */}
+      {/* Footer del componente/ pie de pagina */}
       <div style={styles.footerLine}>
         <span style={styles.footerText}>🌿 Preservando las lenguas ancestrales ⛰️</span>
         <span style={styles.footerText}>Hecho con amor para la comunidad 🌍</span>
       </div>
       
+      {/*nota final */}
       <p style={styles.disclaimer}>
         ✨ Este traductor es una herramienta educativa. Las traducciones pueden variar según la región y dialecto. ✨
       </p>

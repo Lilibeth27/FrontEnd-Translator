@@ -1,8 +1,9 @@
+/* Ajuste general de la página */
 html, body, #root {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;           /* Quita márgenes */
+  padding: 0;          /* Quita espacios internos */
+  height: 100%;        /* Alto completo */
+  width: 100%;         /* Ancho completo */
+  overflow: hidden;    /* Sin scroll */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente */
 }
